@@ -1,0 +1,16 @@
+{
+  "name": "Muhmmad Saad Shabir",
+  "short_name": "Saad Shabir",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "My singular goal is to have a net-positive impact on the world. Focusing on network architecture, protocol analysis, and system programming.",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48 72x72 96x96 144x144 192x192 256x256 384x384 512x512",
+      "type": "image/x-icon"
+    }
+  ]
+} 

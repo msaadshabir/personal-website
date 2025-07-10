@@ -1,0 +1,11 @@
+@import url('https://cdn.jsdelivr.net/npm/@vercel/fonts@1.1.0/geist/Geist.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    font-family: 'Geist', 'Geist Fallback', Arial, Helvetica, sans-serif;
+  }
+}
