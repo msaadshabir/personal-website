@@ -1,4 +1,4 @@
-# Muhmmad Saad Shabir — Personal Website
+# Personal Website
 
 ## What This Website Includes
 - Personal introduction and mission
