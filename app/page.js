@@ -7,6 +7,7 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <main className="max-w-2xl mx-auto px-4 sm:px-6 py-6 text-gray-900 font-normal">
         <h1 className="text-2xl sm:text-3xl font-semibold mb-2 text-black">Hey, I'm Muhmmad Saad Shabir</h1>
+        <div className="mb-8" />
 
         <h3 className="text-xl font-semibold mb-1 text-black">What I'm up to:</h3>
         <p className="mb-4 text-gray-900 font-normal">Focusing on network architecture, protocol analysis, and system programming.</p>
