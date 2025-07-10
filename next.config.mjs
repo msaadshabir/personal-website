@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  experimental: {
+    legacyBrowsers: false,
+  },
+};
 
 export default nextConfig;

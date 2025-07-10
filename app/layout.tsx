@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Muhmmad Saad Shabir",
+  title: "Saad",
   description: "My singular goal is to have a net-positive impact on the world. Focusing on network architecture, protocol analysis, and system programming.",
 };
 
@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
-        <title>Muhmmad Saad Shabir</title>
+        <title>Saad</title>
         <meta name="description" content="My singular goal is to have a net-positive impact on the world. Focusing on network architecture, protocol analysis, and system programming." />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
