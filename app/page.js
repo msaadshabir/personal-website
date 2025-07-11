@@ -28,8 +28,8 @@ export default function Home() {
 
         <h3 className="text-xl font-semibold mb-1 text-black">Thinking about:</h3>
         <div className="mb-4 text-gray-900 font-normal space-y-0.5">
-          <p>Attention</p>
-          <p>Natural selection</p>
+          <p>Awareness</p>
+          <p>Evolution</p>
           <p>Superforecasting</p>
         </div>
 
