@@ -17,3 +17,4 @@ This website is optimized to achieve a 100 score on Google PageSpeed Insights fo
 
 ## Deployment
 This website is deployed using [Vercel](https://vercel.com/)
+
