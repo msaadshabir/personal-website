@@ -19,8 +19,6 @@ export default function RootLayout({
         <meta name="description" content="Focusing on network architecture, protocol analysis, and system programming." />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
-        {/* No favicon for tab icon, matching original eddy.build */}
-        {/* Open Graph and Twitter meta tags for SEO/social */}
         <meta property="og:title" content="Muhmmad Saad Shabir" />
         <meta property="og:description" content="Focusing on network architecture, protocol analysis, and system programming." />
         <meta property="og:type" content="website" />
