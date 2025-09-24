@@ -1,7 +1,7 @@
 # Personal Website
 
 ## What This Website Includes
-- Personal introduction and mission
+- Personal introduction
 - Current focus and interests
 - Professional experience and achievements
 - Contact information (LinkedIn)
@@ -17,4 +17,3 @@ This website is optimized to achieve a 100 score on Google PageSpeed Insights fo
 
 ## Deployment
 This website is deployed using [Vercel](https://vercel.com/)
-
