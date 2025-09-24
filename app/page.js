@@ -17,11 +17,11 @@ export default function Home() {
           <div>
             <p className="font-medium">AriesTECH</p>
             <div className="ml-4 mt-0.5 space-y-0.5 font-normal">
-              <p>- Installed and configured Cisco routers and switches</p>
-              <p>- Maintained LAN/WAN connectivity and uptime</p>
-              <p>- Managed VLANs and inter-VLAN routing</p>
-              <p>- Supported routing protocols (static, RIP, OSPF)</p>
-              <p>- Performed firmware upgrades and config backups</p>
+              <p>- Deployed Cisco routing/switching stack; improved stability and segmentation</p>
+              <p>- Sustained 99%+ uptime; reduced resolution time for incidents</p>
+              <p>- Designed VLAN + OSPF architecture; simplified configs and improved performance</p>
+              <p>- Automated maintenance (upgrades, backups, ACL hygiene)</p>
+              <p>- Diagnosed Layer 2/3 faults with IOS and packet capture tools</p>
             </div>
           </div>
         </div>
