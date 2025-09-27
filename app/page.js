@@ -12,21 +12,18 @@ export default function Home() {
         <h3 className="text-xl font-semibold mb-1 text-black">What I'm up to:</h3>
         <p className="mb-4 text-gray-900 font-normal">Focusing on network architecture, protocol analysis, and system programming.</p>
 
-        <h3 className="text-xl font-semibold mb-1 text-black">Projects:</h3>
-
         <h3 className="text-xl font-semibold mb-1 text-black">Previously:</h3>
         <div className="mb-4 space-y-2 text-gray-900">
           <div>
             <p className="font-medium">AriesTECH</p>
             <div className="ml-4 mt-0.5 space-y-0.5 font-normal">
-              <p>- Deployed Cisco routing/switching stack; improved stability and segmentation</p>
-              <p>- Sustained 99%+ uptime; reduced resolution time for incidents</p>
-              <p>- Designed VLAN + OSPF architecture; simplified configs and improved performance</p>
-              <p>- Automated maintenance (upgrades, backups, ACL hygiene)</p>
-              <p>- Diagnosed Layer 2/3 faults with IOS and packet capture tools</p>
+              <p>- Installed, configured, and maintained Cisco routers & switches; designed Layer 2/3 segmentation (VLANs, trunking, inter-VLAN routing) and implemented static, RIP, and OSPF routing to optimize traffic flow and improve security across the LAN/WAN.</p>
+              <p>- Ensured ~99% network availability via proactive monitoring, rapid diagnostics (using packet-analysis / IOS tools), and regular preventative maintenance (firmware upgrades, ACL reviews, configuration backups).</p>
             </div>
           </div>
         </div>
+
+        <h3 className="text-xl font-semibold mb-1 text-black">Projects:</h3>
 
         <h3 className="text-xl font-semibold mb-1 text-black">Thinking about:</h3>
         <div className="mb-4 text-gray-900 font-normal space-y-0.5">
