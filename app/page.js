@@ -12,6 +12,8 @@ export default function Home() {
         <h3 className="text-xl font-semibold mb-1 text-black">What I'm up to:</h3>
         <p className="mb-4 text-gray-900 font-normal">Focusing on network architecture, protocol analysis, and system programming.</p>
 
+        <h3 className="text-xl font-semibold mb-1 text-black">Projects:</h3>
+
         <h3 className="text-xl font-semibold mb-1 text-black">Previously:</h3>
         <div className="mb-4 space-y-2 text-gray-900">
           <div>
