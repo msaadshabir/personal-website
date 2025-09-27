@@ -26,28 +26,28 @@ export default function Home() {
         <h3 className="text-xl font-semibold mb-1 text-black">Projects:</h3>
         <div className="mb-4 space-y-3 text-gray-900">
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/cloud-netmapper" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">cloud-netmapper</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/cloud-netmapper" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">cloud-netmapper</a></p>
             <div className="ml-4 mt-0.5 space-y-0.5 font-normal">
               <p>- Implemented an automated network topology discovery tool for AWS environments, enabling visual mapping and structured inventory export.</p>
               <p>- Integrated security-analysis routines to detect misconfigurations (e.g. overly permissive SGs, public EC2 exposure) and generate visual alerts.</p>
             </div>
           </div>
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/net-guardian" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">net-guardian</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/net-guardian" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">net-guardian</a></p>
             <div className="ml-4 mt-0.5 space-y-0.5 font-normal">
               <p>- Built a CLI tool for automated local network auditing: device discovery, port scanning, OS/service fingerprinting, and JSON export.</p>
               <p>- Engineered anomaly detection and risk-scoring modules to flag suspicious network behavior or configuration changes.</p>
             </div>
           </div>
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/personal-ai-cli" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">personal-ai-cli</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/personal-ai-cli" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">personal-ai-cli</a></p>
             <div className="ml-4 mt-0.5 space-y-0.5 font-normal">
               <p>- Developed a self-hosted, terminal-based personal AI chatbot enabling users to query their own documents (txt, md, pdf) without external cloud dependencies.</p>
               <p>- Architected a Retrieval-Augmented Generation pipeline with local embeddings & vector store, config validation, and robust error handling for seamless user experience.</p>
             </div>
           </div>
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/personal-website" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">personal-website</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/personal-website" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">personal-website</a></p>
             <div className="ml-4 mt-0.5 space-y-0.5 font-normal">
               <p>- Built a technical portfolio using Next.js and TypeScript. Deployed via Vercel with CI/CD pipeline.</p>
             </div>
