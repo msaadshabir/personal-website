@@ -37,6 +37,9 @@ export default function Home() {
           <div>
             <p className="font-medium"><a href="https://github.com/saad-build/personal-website" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">personal-website</a></p>
           </div>
+          <div>
+            <p className="font-medium"><a href="https://github.com/saad-build/CloudChat" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">CloudChat</a></p>
+          </div>
         </div>
 
         <h3 className="text-xl font-semibold mb-1 text-black">Thinking about:</h3>
