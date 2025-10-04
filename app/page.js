@@ -51,10 +51,10 @@ export default function Home() {
 
         <h2 className="text-xl font-semibold mb-1 text-black">Get in touch:</h2>
         <div className="mb-1">
-          <a href="mailto:saad.shabir@hotmail.com" className="text-gray-900 font-normal underline">saad.shabir@hotmail.com</a>
+          <a href="mailto:saad.shabir@hotmail.com" className="text-black font-medium underline hover:text-gray-600">saad.shabir@hotmail.com</a>
         </div>
         <div className="mb-1">
-          <a href="https://www.linkedin.com/in/saadshabir/" target="_blank" rel="noopener noreferrer" className="text-gray-900 font-normal underline">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/saadshabir/" target="_blank" rel="noopener noreferrer" className="text-black font-medium underline hover:text-gray-600">LinkedIn</a>
         </div>
         <p className="text-gray-900 font-normal">Let's venture into greatness before AGI makes us the permanent underclass :)</p>
       </main>
