@@ -9,10 +9,10 @@ export default function Home() {
         <h1 className="text-2xl sm:text-3xl font-semibold mb-2 text-black">Hey, I'm Muhmmad Saad Shabir</h1>
         <div className="mb-8" />
 
-        <h3 className="text-xl font-semibold mb-1 text-black">What I'm up to:</h3>
+        <h2 className="text-xl font-semibold mb-1 text-black">What I'm up to:</h2>
         <p className="mb-4 text-gray-900 font-normal">Focusing on network architecture, protocol analysis, and system programming.</p>
 
-        <h3 className="text-xl font-semibold mb-1 text-black">Previously:</h3>
+        <h2 className="text-xl font-semibold mb-1 text-black">Previously:</h2>
         <div className="mb-4 space-y-2 text-gray-900">
           <div>
             <p className="font-medium">AriesTECH</p>
@@ -23,7 +23,7 @@ export default function Home() {
           </div>
         </div>
 
-        <h3 className="text-xl font-semibold mb-1 text-black">Projects:</h3>
+        <h2 className="text-xl font-semibold mb-1 text-black">Projects:</h2>
         <div className="mb-4 space-y-3 text-gray-900">
           <div>
             <p className="font-medium"><a href="https://github.com/saad-build/cloud-netmapper" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">cloud-netmapper</a></p>
@@ -42,14 +42,14 @@ export default function Home() {
           </div>
         </div>
 
-        <h3 className="text-xl font-semibold mb-1 text-black">Thinking about:</h3>
+        <h2 className="text-xl font-semibold mb-1 text-black">Thinking about:</h2>
         <div className="mb-4 text-gray-900 font-normal space-y-0.5">
           <p>Awareness</p>
           <p>Evolution</p>
           <p>Superforecasting</p>
         </div>
 
-        <h3 className="text-xl font-semibold mb-1 text-black">Get in touch:</h3>
+        <h2 className="text-xl font-semibold mb-1 text-black">Get in touch:</h2>
         <div className="mb-1">
           <a href="mailto:saad.shabir@hotmail.com" className="text-gray-900 font-normal underline">saad.shabir@hotmail.com</a>
         </div>
