@@ -1,0 +1,20 @@
+# Browsers that we support
+# These versions support all ES6+ features without polyfills
+
+# Chrome (including Chrome Android)
+chrome >= 87
+
+# Edge
+edge >= 88
+
+# Firefox
+firefox >= 78
+
+# Safari (including iOS Safari)
+safari >= 14
+
+# Not dead browsers
+not dead
+
+# Exclude browsers with less than 0.2% market share
+not op_mini all
