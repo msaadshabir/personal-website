@@ -18,7 +18,3 @@ A modern, responsive personal website. Built with Next.js and deployed on Vercel
 ## Performance
 
 This website is optimized to achieve a perfect 100 score on Google PageSpeed Insights for both mobile and desktop platforms.
-
-## Deployment
-
-This website is deployed using [Vercel](https://vercel.com/)
