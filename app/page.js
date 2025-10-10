@@ -24,7 +24,13 @@ export default function Home() {
         </div>
 
         <h2 className="text-xl font-semibold mb-1 text-black">Projects:</h2>
-        <div className="mb-4 space-y-3 text-gray-900">
+        <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-3 text-gray-900">
+          <div>
+            <p className="font-medium"><a href="https://github.com/saad-build/ZTAP" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">ZTAP</a></p>
+          </div>
+          <div>
+            <p className="font-medium"><a href="https://github.com/saad-build/pci-segment" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">pci-segment</a></p>
+          </div>
           <div>
             <p className="font-medium"><a href="https://github.com/saad-build/cloud-netmapper" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">cloud-netmapper</a></p>
           </div>
