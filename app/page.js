@@ -56,11 +56,13 @@ export default function Home() {
         </div>
 
         <h2 className="text-xl font-semibold mb-1 text-black">Get in touch:</h2>
-        <div className="mb-1">
-          <a href="mailto:saad.shabir@hotmail.com" className="text-black font-medium underline hover:text-gray-600">saad.shabir@hotmail.com</a>
-        </div>
-        <div className="mb-1">
-          <a href="https://www.linkedin.com/in/saadshabir/" target="_blank" rel="noopener noreferrer" className="text-black font-medium underline hover:text-gray-600">LinkedIn</a>
+        <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-3">
+          <div>
+            <a href="mailto:saad.shabir@hotmail.com" className="text-black font-medium underline hover:text-gray-600">saad.shabir@hotmail.com</a>
+          </div>
+          <div>
+            <a href="https://www.linkedin.com/in/saadshabir/" target="_blank" rel="noopener noreferrer" className="text-black font-medium underline hover:text-gray-600">LinkedIn</a>
+          </div>
         </div>
         <p className="text-gray-900 font-normal">Let's venture into greatness before AGI makes us the permanent underclass :)</p>
       </main>
