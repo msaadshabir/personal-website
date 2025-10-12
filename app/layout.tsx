@@ -5,7 +5,7 @@ import { ThemeToggle } from '../components/ThemeToggle';
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Saad",
+  title: "Muhammad Saad Shabir",
   description: "Focusing on network architecture, protocol analysis, and system programming.",
   manifest: "/manifest.json",
   openGraph: {
