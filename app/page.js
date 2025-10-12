@@ -4,19 +4,19 @@ import React from "react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 py-6 text-gray-900 font-normal">
-        <h1 className="text-2xl sm:text-3xl font-semibold mb-2 text-black">Hey, I'm Muhmmad Saad Shabir</h1>
+    <div className="min-h-screen bg-white dark:bg-gray-900">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 py-6 text-gray-900 dark:text-gray-100 font-normal">
+        <h1 className="text-2xl sm:text-3xl font-semibold mb-2 text-black dark:text-white">Hey, I'm Muhmmad Saad Shabir</h1>
         <div className="mb-8" />
 
-        <h2 className="text-xl font-semibold mb-1 text-black">What I'm up to:</h2>
-        <p className="mb-4 text-gray-900 font-normal">Focusing on network architecture, protocol analysis, and system programming.</p>
+        <h2 className="text-xl font-semibold mb-1 text-black dark:text-white">What I'm up to:</h2>
+        <p className="mb-4 text-gray-900 dark:text-gray-100 font-normal">Focusing on network architecture, protocol analysis, and system programming.</p>
 
-        <h2 className="text-xl font-semibold mb-1 text-black">Currently:</h2>
-        <p className="mb-4 text-gray-900 font-normal">N/A</p>
+        <h2 className="text-xl font-semibold mb-1 text-black dark:text-white">Currently:</h2>
+        <p className="mb-4 text-gray-900 dark:text-gray-100 font-normal">N/A</p>
 
-        <h2 className="text-xl font-semibold mb-1 text-black">Previously:</h2>
-        <div className="mb-4 space-y-2 text-gray-900">
+        <h2 className="text-xl font-semibold mb-1 text-black dark:text-white">Previously:</h2>
+        <div className="mb-4 space-y-2 text-gray-900 dark:text-gray-100">
           <div>
             <p className="font-medium">AriesTECH</p>
             <div className="ml-4 mt-0.5 space-y-0.5 font-normal">
@@ -26,48 +26,48 @@ export default function Home() {
           </div>
         </div>
 
-        <h2 className="text-xl font-semibold mb-1 text-black">Projects:</h2>
-        <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-3 text-gray-900">
+        <h2 className="text-xl font-semibold mb-1 text-black dark:text-white">Projects:</h2>
+        <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-3 text-gray-900 dark:text-gray-100">
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/ZTAP" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">ZTAP</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/ZTAP" target="_blank" rel="noopener noreferrer" className="text-black dark:text-white underline hover:text-gray-600 dark:hover:text-gray-400">ZTAP</a></p>
           </div>
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/pci-segment" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">pci-segment</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/pci-segment" target="_blank" rel="noopener noreferrer" className="text-black dark:text-white underline hover:text-gray-600 dark:hover:text-gray-400">pci-segment</a></p>
           </div>
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/cloud-netmapper" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">cloud-netmapper</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/cloud-netmapper" target="_blank" rel="noopener noreferrer" className="text-black dark:text-white underline hover:text-gray-600 dark:hover:text-gray-400">cloud-netmapper</a></p>
           </div>
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/net-guardian" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">net-guardian</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/net-guardian" target="_blank" rel="noopener noreferrer" className="text-black dark:text-white underline hover:text-gray-600 dark:hover:text-gray-400">net-guardian</a></p>
           </div>
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/personal-ai-cli" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">personal-ai-cli</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/personal-ai-cli" target="_blank" rel="noopener noreferrer" className="text-black dark:text-white underline hover:text-gray-600 dark:hover:text-gray-400">personal-ai-cli</a></p>
           </div>
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/personal-website" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">personal-website</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/personal-website" target="_blank" rel="noopener noreferrer" className="text-black dark:text-white underline hover:text-gray-600 dark:hover:text-gray-400">personal-website</a></p>
           </div>
           <div>
-            <p className="font-medium"><a href="https://github.com/saad-build/CloudChat" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-gray-600">CloudChat</a></p>
+            <p className="font-medium"><a href="https://github.com/saad-build/CloudChat" target="_blank" rel="noopener noreferrer" className="text-black dark:text-white underline hover:text-gray-600 dark:hover:text-gray-400">CloudChat</a></p>
           </div>
         </div>
 
-        <h2 className="text-xl font-semibold mb-1 text-black">Thinking about:</h2>
-        <div className="mb-4 text-gray-900 font-normal space-y-0.5">
+        <h2 className="text-xl font-semibold mb-1 text-black dark:text-white">Thinking about:</h2>
+        <div className="mb-4 text-gray-900 dark:text-gray-100 font-normal space-y-0.5">
           <p>Awareness</p>
           <p>Evolution</p>
           <p>Superforecasting</p>
         </div>
 
-        <h2 className="text-xl font-semibold mb-1 text-black">Get in touch:</h2>
+        <h2 className="text-xl font-semibold mb-1 text-black dark:text-white">Get in touch:</h2>
         <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-3">
           <div>
-            <a href="mailto:saad.shabir@hotmail.com" className="text-black font-medium underline hover:text-gray-600">saad.shabir@hotmail.com</a>
+            <a href="mailto:saad.shabir@hotmail.com" className="text-black dark:text-white font-medium underline hover:text-gray-600 dark:hover:text-gray-400">saad.shabir@hotmail.com</a>
           </div>
           <div>
-            <a href="https://www.linkedin.com/in/saadshabir/" target="_blank" rel="noopener noreferrer" className="text-black font-medium underline hover:text-gray-600">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/saadshabir/" target="_blank" rel="noopener noreferrer" className="text-black dark:text-white font-medium underline hover:text-gray-600 dark:hover:text-gray-400">LinkedIn</a>
           </div>
         </div>
-        <p className="text-gray-900 font-normal">Let's venture into greatness before AGI makes us the permanent underclass :)</p>
+        <p className="text-gray-900 dark:text-gray-100 font-normal">Let's venture into greatness before AGI makes us the permanent underclass :)</p>
       </main>
     </div>
   );

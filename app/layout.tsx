@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { GeistSans } from 'geist/font/sans';
+import { ThemeProvider } from '../components/ThemeProvider';
+import { ThemeToggle } from '../components/ThemeToggle';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -30,8 +32,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="antialiased min-h-screen bg-white">
-        {children}
+      <body className="antialiased min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+        <ThemeProvider>
+          <ThemeToggle />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
