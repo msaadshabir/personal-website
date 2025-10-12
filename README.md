@@ -25,7 +25,6 @@ A modern, minimal personal website showcasing professional experience, projects,
 
 - **Page Size:** 1.64 kB
 - **First Load JS:** 88.6 kB
-- **Modern Browser Targeting:** Chrome 87+, Edge 88+, Firefox 78+, Safari 14+
 - **Optimizations:**
   - Self-hosted fonts (eliminates external CDN blocking)
   - Minimal polyfills for modern browsers
