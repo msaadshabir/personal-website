@@ -21,24 +21,6 @@ A modern, minimal personal website showcasing professional experience, projects,
 - **Deployment:** Vercel
 - **Domain:** [msaadshabir.vercel.app](https://msaadshabir.vercel.app)
 
-## Project Structure
-
-```
-personal-website/
-├── app/
-│   ├── layout.tsx          # Root layout with theme provider
-│   ├── page.js             # Main homepage
-│   └── globals.css         # Global styles and animations
-├── components/
-│   ├── ThemeProvider.tsx   # Theme context and state management
-│   └── ThemeToggle.tsx     # iOS-style theme switcher
-├── public/
-│   ├── manifest.json       # PWA manifest
-│   ├── robots.txt          # SEO robots file
-│   └── sitemap.xml         # SEO sitemap
-└── [config files]
-```
-
 ## Performance
 
 - **Page Size:** 1.64 kB
@@ -50,38 +32,6 @@ personal-website/
   - SWC minification
   - Static site generation
   - CSS animations (hardware accelerated)
-
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-```
-
-## Key Design Decisions
-
-1. **Minimalism:** Clean, distraction-free interface focused on content
-2. **Typography:** Improved hierarchy with larger headings and relaxed line height
-3. **Color Scheme:** Softer zinc palette for comfortable reading in both modes
-4. **Animations:** Subtle fade-ins that enhance without overwhelming
-5. **Accessibility:** Semantic HTML, proper heading structure, and theme persistence
-
-## Browser Support
-
-Targets modern browsers for optimal performance:
-
-- Chrome/Edge 87+
-- Firefox 78+
-- Safari 14+
 
 ## License
 
