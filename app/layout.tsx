@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Muhmmad Saad Shabir",
     description: "Focusing on network architecture, protocol analysis, and system programming.",
     type: "website",
-    url: "https://saad-pw.vercel.app/",
+    url: "https://msaadshabir.vercel.app/",
   },
   twitter: {
     card: "summary",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#fafafa",
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="antialiased min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <body className="antialiased min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300">
         <ThemeProvider>
           <ThemeToggle />
           {children}

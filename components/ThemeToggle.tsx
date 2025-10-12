@@ -12,14 +12,14 @@ export function ThemeToggle() {
 
   return (
     <div className="fixed top-4 right-4 z-50">
-      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-lg p-1 shadow-sm">
-        <div className="flex items-center space-x-1">
+      <div className="bg-zinc-200 dark:bg-zinc-800 rounded-full p-0.5 shadow-sm">
+        <div className="flex items-center">
           <button
             onClick={() => handleThemeChange('light')}
-            className={`px-2 py-1 text-xs rounded ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
               theme === 'light'
-                ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
-                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
             }`}
             title="Light mode"
           >
@@ -27,10 +27,10 @@ export function ThemeToggle() {
           </button>
           <button
             onClick={() => handleThemeChange('dark')}
-            className={`px-2 py-1 text-xs rounded ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
               theme === 'dark'
-                ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
-                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
             }`}
             title="Dark mode"
           >
@@ -38,10 +38,10 @@ export function ThemeToggle() {
           </button>
           <button
             onClick={() => handleThemeChange('system')}
-            className={`px-2 py-1 text-xs rounded ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
               theme === 'system'
-                ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
-                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
             }`}
             title="Follow system"
           >

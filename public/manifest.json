@@ -1,9 +1,9 @@
 {
-  "name": "Muhmmad Saad Shabir",
+  "name": "Muhammad Saad Shabir",
   "short_name": "Saad Shabir",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#fafafa",
+  "theme_color": "#fafafa",
   "description": "Focusing on network architecture, protocol analysis, and system programming."
 } 
