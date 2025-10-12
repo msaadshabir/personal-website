@@ -7,6 +7,7 @@ A modern, responsive personal website. Built with Next.js and deployed on Vercel
 - Current focus areas and interests
 - Professional experience, key achievements, and projects
 - Contact information, including LinkedIn
+- Dark/Light mode
 
 ## Tech Stack
 
