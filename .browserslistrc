@@ -1,20 +1,15 @@
-# Browsers that we support
-# These versions support all ES6+ features without polyfills
+# Modern browsers only - targeting browsers that support ES2015+ natively
+# This should eliminate unnecessary polyfills for Array.at, Array.flat, etc.
 
-# Chrome (including Chrome Android)
-chrome >= 87
-
-# Edge
-edge >= 88
-
-# Firefox
-firefox >= 78
-
-# Safari (including iOS Safari)
-safari >= 14
-
-# Not dead browsers
-not dead
-
-# Exclude browsers with less than 0.2% market share
+defaults
+not ie 11
+not ie_mob 11
 not op_mini all
+not android < 87
+not chrome < 87
+not firefox < 78
+not safari < 14
+not edge < 88
+
+# Only browsers with > 1% market share
+> 1%
