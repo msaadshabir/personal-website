@@ -13,9 +13,9 @@ A modern, minimal personal website showcasing professional experience, projects,
 
 ## Tech Stack
 
-- **Framework:** Next.js 14.2.30 (App Router)
-- **Language:** TypeScript 5 & React 18
-- **Styling:** Tailwind CSS 3.3.0
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript & React
+- **Styling:** Tailwind CSS 
 - **Font:** Geist (self-hosted via next/font)
 - **Color Palette:** Zinc-based theme (50, 300, 700, 800, 900)
 - **Deployment:** Vercel
