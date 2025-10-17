@@ -51,55 +51,55 @@ export default function Projects() {
       id: "001",
       name: "ZTAP",
       url: "https://github.com/msaadshabir/ZTAP",
-      description: "Zero Trust Access Platform for secure network segmentation and access control.",
+      description: "ZTAP is a lightweight, self-hosted proxy designed to enforce Zero Trust principles for internal services. It sits between users and backend systems, verifying identity and policy compliance before granting access. Built for simplicity, speed, and auditability.",
       tags: ["Go", "eBPF", "YAML", "Python", "Prometheus", "Grafana"],
     },
     {
       id: "002",
       name: "pci-segment",
       url: "https://github.com/msaadshabir/pci-segment",
-      description: "PCI DSS compliant network segmentation tool for enterprise environments.",
+      description: "pci-segment enforces PCI-DSS Requirements 1.2 & 1.3 by enabling network microsegmentation of the Cardholder Data Environment (CDE). It delivers a free, auditor-ready alternative to costly proprietary solutions. Tailored for fintech and payment-handling systems.",
       tags: ["Go", "eBPF", "pf", "YAML", "CLI"],
     },
     {
       id: "003",
       name: "cloud-netmapper",
       url: "https://github.com/msaadshabir/cloud-netmapper",
-      description: "Cloud network topology mapper for AWS, Azure, and GCP infrastructures.",
+      description: "cloud-netmapper captures, analyzes, and visualizes network topology and traffic within cloud environments (AWS, Azure, GCP, etc.). It provides insights into service connectivity, dependencies, and potential security blind spots.",
       tags: ["Go", "AWS SDK", "Graphviz", "JSON", "CLI"],
     },
     {
       id: "004",
       name: "net-guardian",
       url: "https://github.com/msaadshabir/net-guardian",
-      description: "Real-time network monitoring and threat detection system.",
+      description: "net-guardian is a command-line tool in Python that scans your local network, inventories devices, and assesses security risks. It merges network scanning, OS/service detection, and anomaly detection into one lightweight auditor.",
       tags: ["Python", "Scapy", "Nmap", "Rich", "pandas", "scikit-learn"],
     },
     {
       id: "005",
       name: "personal-ai-cli",
       url: "https://github.com/msaadshabir/personal-ai-cli",
-      description: "Command-line interface tool powered by AI for network automation tasks.",
+      description: "Terminal based, open-source, self-hosted personal AI chatbot that anyone can use with their own data. No UI, no cloud, no tracking.",
       tags: ["Python", "ChromaDB", "Ollama", "Sentence-Transformers", "RAG"],
     },
     {
       id: "006",
       name: "CloudChat",
       url: "https://github.com/msaadshabir/CloudChat",
-      description: "Real-time chat application built with cloud-native architecture.",
+      description: "CloudChat is an open source chat platform and API framework. It enables developers to build real-time messaging systems with self-hosted control, privacy, and extensibility.",
       tags: ["Next.js", "TypeScript", "Tailwind", "Clerk", "Neon Postgres", "Drizzle ORM"],
     },
     {
       id: "007",
       name: "personal-website",
       url: "https://github.com/msaadshabir/personal-website",
-      description: "Personal portfolio website showcasing projects and experience.",
+      description: "Modern portfolio showcasing projects and professional experience.",
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "React", "Vercel"],
     },
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 flex flex-col">
+    <div className="w-screen h-screen flex flex-col bg-zinc-50 dark:bg-zinc-900">
       {/* Navigation */}
       <nav className="flex justify-end items-center px-4 md:px-8 py-6 pr-4 md:pr-8">
         <div className="flex gap-4 md:gap-8">
@@ -113,7 +113,7 @@ export default function Projects() {
       </nav>
 
       {/* Projects Content */}
-      <main className="flex-1 max-w-5xl w-full mx-auto px-4 md:px-8 py-6 md:py-8">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 md:px-8 py-6 md:py-8 overflow-y-auto md:overflow-hidden">
         <div className="space-y-10 md:space-y-12">
           {projects.map((project) => (
             <div
@@ -157,7 +157,7 @@ export default function Projects() {
       </main>
 
       {/* Footer */}
-      <footer className="px-4 md:px-8 py-4 md:py-6">
+      <footer className="px-4 md:px-8 py-4 md:py-6 pb-8 md:pb-6">
         <div className="flex flex-wrap gap-4 md:gap-8">
           <a
             href="/MuhammadSaad_Shabir_Resume.pdf"
