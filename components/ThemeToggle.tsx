@@ -21,11 +21,11 @@ export function ThemeToggle() {
   }
 
   return (
-    <div className="absolute top-6 left-6 z-50">
-      <div className="flex items-center gap-8">
+    <div className="fixed top-6 left-6 z-50">
+      <div className="flex items-center gap-4 md:gap-8">
         <button
           onClick={() => handleThemeChange('light')}
-          className={`text-2xl transition-colors ${
+          className={`text-xl md:text-2xl transition-colors ${
             theme === 'light'
               ? 'font-bold text-zinc-900 dark:text-zinc-50'
               : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50'
@@ -36,7 +36,7 @@ export function ThemeToggle() {
         </button>
         <button
           onClick={() => handleThemeChange('dark')}
-          className={`text-2xl transition-colors ${
+          className={`text-xl md:text-2xl transition-colors ${
             theme === 'dark'
               ? 'font-bold text-zinc-900 dark:text-zinc-50'
               : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50'

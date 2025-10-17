@@ -101,20 +101,20 @@ export default function Projects() {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 flex flex-col">
       {/* Navigation */}
-      <nav className="flex justify-end items-center px-8 py-6">
-        <div className="flex gap-8">
-          <Link href="/" className="text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors" aria-label="Home page">
+      <nav className="flex justify-end items-center px-4 md:px-8 py-6 pr-4 md:pr-8">
+        <div className="flex gap-4 md:gap-8">
+          <Link href="/" className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors" aria-label="Home page">
             home
           </Link>
-          <Link href="/projects" className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 transition-colors" aria-label="Projects page" aria-current="page">
+          <Link href="/projects" className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50 transition-colors" aria-label="Projects page" aria-current="page">
             projects
           </Link>
         </div>
       </nav>
 
       {/* Projects Content */}
-      <main className="flex-1 max-w-5xl w-full mx-auto px-8 py-8">
-        <div className="space-y-12">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 md:px-8 py-6 md:py-8">
+        <div className="space-y-10 md:space-y-12">
           {projects.map((project) => (
             <div
               key={project.id}
@@ -130,13 +130,13 @@ export default function Projects() {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors inline-block"
+                className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors inline-block"
               >
                 {project.name}
               </a>
 
               {/* Description */}
-              <p className="text-base text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400">
                 {project.description}
               </p>
 
@@ -157,20 +157,20 @@ export default function Projects() {
       </main>
 
       {/* Footer */}
-      <footer className="px-8 py-6">
-        <div className="flex gap-8">
+      <footer className="px-4 md:px-8 py-4 md:py-6">
+        <div className="flex flex-wrap gap-4 md:gap-8">
           <a
             href="/MuhammadSaad_Shabir_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+            className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
             aria-label="Download resume (opens in new tab)"
           >
             resume
           </a>
           <button
             onClick={copyEmail}
-            className="relative text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors cursor-pointer bg-transparent border-none p-0"
+            className="relative text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors cursor-pointer bg-transparent border-none p-0"
             aria-label="Copy email address to clipboard"
           >
             email
@@ -184,7 +184,7 @@ export default function Projects() {
             href="https://www.linkedin.com/in/saadshabir/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+            className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
             aria-label="LinkedIn profile (opens in new tab)"
           >
             linkedin
@@ -193,7 +193,7 @@ export default function Projects() {
             href="https://github.com/msaadshabir"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+            className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
             aria-label="GitHub profile (opens in new tab)"
           >
             github

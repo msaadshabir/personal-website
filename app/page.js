@@ -45,28 +45,28 @@ export default function Home() {
   return (
     <div className="w-screen h-screen flex flex-col bg-zinc-50 dark:bg-zinc-900">
       {/* Navigation */}
-      <nav className="flex justify-end items-center px-8 py-6">
-        <div className="flex gap-8">
-          <Link href="/" className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 transition-colors" aria-label="Home page" aria-current="page">
+      <nav className="flex justify-end items-center px-4 md:px-8 py-6 pr-4 md:pr-8">
+        <div className="flex gap-4 md:gap-8">
+          <Link href="/" className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50 transition-colors" aria-label="Home page" aria-current="page">
             home
           </Link>
-          <Link href="/projects" className="text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors" aria-label="Projects page">
+          <Link href="/projects" className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors" aria-label="Projects page">
             projects
           </Link>
         </div>
       </nav>
 
       {/* Main Content - Two Column Layout */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-8 flex items-start overflow-hidden pt-16">
-        <div className="w-full flex flex-col lg:flex-row gap-12 lg:gap-20">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 md:px-8 flex items-start overflow-y-auto md:overflow-hidden pt-4 md:pt-16 pb-4 md:pb-0">
+        <div className="w-full flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-20">
           {/* Left Column - Bio */}
-          <div className="lg:flex-[2] space-y-8">
+          <div className="lg:flex-[2] space-y-6 md:space-y-8">
             <div>
-              <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-zinc-900 dark:text-zinc-50 leading-tight">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-zinc-900 dark:text-zinc-50 leading-tight">
                 Hi, I'm Muhammad Saad Shabir
               </h1>
               
-              <div className="space-y-2 text-lg text-zinc-600 dark:text-zinc-400">
+              <div className="space-y-2 text-base md:text-lg text-zinc-600 dark:text-zinc-400">
                 <p>
                   Focusing on network architecture, protocol analysis, and system programming
                 </p>
@@ -80,8 +80,8 @@ export default function Home() {
             </div>
 
             <div className="space-y-3">
-              <p className="text-lg font-bold text-zinc-900 dark:text-zinc-50">Thinking about</p>
-              <div className="text-lg text-zinc-600 dark:text-zinc-400 space-y-1">
+              <p className="text-base md:text-lg font-bold text-zinc-900 dark:text-zinc-50">Thinking about</p>
+              <div className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 space-y-1">
                 <p>Attention</p>
                 <p>Natural selection</p>
                 <p>Superforecasting</p>
@@ -93,31 +93,31 @@ export default function Home() {
           </div>
 
           {/* Right Column - Experience */}
-          <div className="lg:flex-[1] space-y-6">
+          <div className="lg:flex-[1] space-y-4 md:space-y-6">
             <div className="space-y-2">
-              <p className="text-lg font-bold text-zinc-900 dark:text-zinc-50">AriesTECH</p>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400">Network Technician</p>
-              <p className="text-base text-zinc-600 dark:text-zinc-400">Installed and configured Cisco routers & switches, designed network segmentation, and maintained ~99% uptime through proactive monitoring and diagnostics.</p>
+              <p className="text-base md:text-lg font-bold text-zinc-900 dark:text-zinc-50">AriesTECH</p>
+              <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400">Network Technician</p>
+              <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400">Installed and configured Cisco routers & switches, designed network segmentation, and maintained ~99% uptime through proactive monitoring and diagnostics.</p>
             </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="px-8 py-6">
-        <div className="flex gap-8">
+      <footer className="px-4 md:px-8 py-4 md:py-6">
+        <div className="flex flex-wrap gap-4 md:gap-8">
           <a
             href="/MuhammadSaad_Shabir_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+            className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
             aria-label="Download resume (opens in new tab)"
           >
             resume
           </a>
           <button
             onClick={copyEmail}
-            className="relative text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors cursor-pointer bg-transparent border-none p-0"
+            className="relative text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors cursor-pointer bg-transparent border-none p-0"
             aria-label="Copy email address to clipboard"
           >
             email
@@ -131,7 +131,7 @@ export default function Home() {
             href="https://www.linkedin.com/in/saadshabir/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+            className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
             aria-label="LinkedIn profile (opens in new tab)"
           >
             linkedin
@@ -140,7 +140,7 @@ export default function Home() {
             href="https://github.com/msaadshabir"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+            className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
             aria-label="GitHub profile (opens in new tab)"
           >
             github
