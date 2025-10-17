@@ -1,37 +1,52 @@
 # Personal Website
 
-A modern, minimal personal website showcasing professional experience, projects, and technical focus. Built with Next.js 14 and optimized for performance with a clean, accessible design.
-
-## Features
-
-- **Theme System:** Dark/Light/System mode with iOS-style segmented control
-- **Micro-interactions:** Subtle fade-in animations and smooth hover transitions
-- **Click-to-copy Email:** One-click email copying with visual feedback
-- **Responsive Design:** Optimized for all screen sizes
-- **Performance Optimized:** Minimal JavaScript, optimized fonts, and fast load times
-- **Accessibility:** Proper semantic HTML, ARIA labels, and keyboard navigation
+Modern portfolio showcasing projects and professional experience.
 
 ## Tech Stack
 
-- **Framework:** Next.js (App Router)
-- **Language:** TypeScript & React
-- **Styling:** Tailwind CSS 
-- **Font:** Geist (self-hosted via next/font)
-- **Color Palette:** Zinc-based theme (50, 300, 700, 800, 900)
-- **Deployment:** Vercel
-- **Domain:** [msaadshabir.vercel.app](https://msaadshabir.vercel.app)
+- Next.js 14 (App Router)
+- React 18
+- TypeScript
+- Tailwind CSS
+- Inter Font (next/font/google)
+
+## Features
+
+- Dark/Light theme with persistence
+- Click-to-copy email
+- Responsive design
+- SEO optimized
+- Accessibility compliant
 
 ## Performance
 
-- **Page Size:** 1.64 kB
-- **First Load JS:** 88.6 kB
-- **Optimizations:**
-  - Self-hosted fonts (eliminates external CDN blocking)
-  - Minimal polyfills for modern browsers
-  - SWC minification
-  - Static site generation
-  - CSS animations (hardware accelerated)
+```
+Route                 Size     First Load JS
+/                     1.62 kB  97.3 kB
+/projects             1.97 kB  97.7 kB
+```
+
+- Static site generation
+- Optimized fonts
+- Modern browser targeting
+- Zero external dependencies
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+Visit `http://localhost:3000`
+
+## Build
+
+```bash
+npm run build
+npm start
+```
 
 ## License
 
-Personal project - All rights reserved
+All rights reserved

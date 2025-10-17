@@ -8,7 +8,7 @@
   }
   
   html, body {
-    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
 }
 
@@ -17,31 +17,27 @@
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(10px);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
     }
   }
 
   .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.4s ease-out forwards;
+    opacity: 0;
   }
 
   .animate-delay-100 {
     animation-delay: 0.1s;
-    opacity: 0;
   }
 
   .animate-delay-200 {
     animation-delay: 0.2s;
-    opacity: 0;
   }
 
   .animate-delay-300 {
     animation-delay: 0.3s;
-    opacity: 0;
   }
 
   .animate-delay-400 {

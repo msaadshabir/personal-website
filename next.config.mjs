@@ -8,9 +8,8 @@ const nextConfig = {
   swcMinify: true,
   // Optimize fonts
   optimizeFonts: true,
-  // Optimize package imports for better performance
+  // Optimize CSS
   experimental: {
-    optimizePackageImports: ['geist'],
     optimizeCss: true,
   },
   // Configure webpack optimization to reduce polyfill bundle size
