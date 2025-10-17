@@ -21,7 +21,7 @@ export function ThemeToggle() {
   }
 
   return (
-    <div className="fixed top-6 left-6 z-50">
+    <div className="absolute top-6 left-6 z-50">
       <div className="flex items-center gap-4 md:gap-8">
         <button
           onClick={() => handleThemeChange('light')}

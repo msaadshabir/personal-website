@@ -104,7 +104,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="px-4 md:px-8 py-4 md:py-6">
+      <footer className="px-4 md:px-8 py-4 md:py-6 pb-8 md:pb-6">
         <div className="flex flex-wrap gap-4 md:gap-8">
           <a
             href="/MuhammadSaad_Shabir_Resume.pdf"
