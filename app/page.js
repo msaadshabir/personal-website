@@ -128,7 +128,7 @@ export default function Home() {
             )}
           </button>
           <a
-            href="https://www.linkedin.com/in/saadshabir/"
+            href="https://www.linkedin.com/in/msaadshabir/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
