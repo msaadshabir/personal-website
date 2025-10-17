@@ -31,22 +31,6 @@ Route                 Size     First Load JS
 - Modern browser targeting
 - Zero external dependencies
 
-## Development
-
-```bash
-npm install
-npm run dev
-```
-
-Visit `http://localhost:3000`
-
-## Build
-
-```bash
-npm run build
-npm start
-```
-
 ## License
 
 All rights reserved
