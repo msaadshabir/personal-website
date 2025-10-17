@@ -113,7 +113,7 @@ export default function Projects() {
       </nav>
 
       {/* Projects Content */}
-      <main className="flex-1 max-w-5xl w-full mx-auto px-4 md:px-8 py-6 md:py-8 overflow-y-auto md:overflow-hidden">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 md:px-8 py-6 md:py-8 overflow-y-auto">
         <div className="space-y-10 md:space-y-12">
           {projects.map((project) => (
             <div
