@@ -20,12 +20,6 @@ Modern portfolio showcasing projects and professional experience.
 
 ## Performance
 
-```
-Route                 Size     First Load JS
-/                     1.62 kB  97.3 kB
-/projects             1.97 kB  97.7 kB
-```
-
 - Static site generation
 - Optimized fonts
 - Modern browser targeting
