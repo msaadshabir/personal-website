@@ -71,6 +71,9 @@ export default function Home() {
                   Focusing on network architecture, protocol analysis, and system programming
                 </p>
                 <p>
+                  Currently exploring new experiences
+                </p>
+                <p>
                   Previously at <span className="font-semibold text-zinc-900 dark:text-zinc-50">AriesTECH</span>
                 </p>
                 <p>
