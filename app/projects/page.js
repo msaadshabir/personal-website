@@ -120,11 +120,6 @@ export default function Projects() {
               key={project.id}
               className="space-y-3"
             >
-              {/* Project Number */}
-              <div className="text-sm font-bold text-zinc-400 dark:text-zinc-500">
-                {project.id}
-              </div>
-
               {/* Project Title */}
               <a
                 href={project.url}
