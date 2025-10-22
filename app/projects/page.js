@@ -1,50 +1,19 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+import React, { useEffect } from "react";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export default function Projects() {
-  const [emailCopied, setEmailCopied] = useState(false);
-  const timeoutRef = useRef(null);
-
   // Set page title and meta description
   useEffect(() => {
-    document.title = "Projects | Muhammad Saad Shabir";
+    document.title = `Projects | ${SITE_CONFIG.name}`;
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 'Network engineering and system programming projects including ZTAP, pci-segment, cloud-netmapper, and more.');
     }
   }, []);
-
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
-
-  const copyEmail = async (e) => {
-    e.preventDefault();
-    try {
-      await navigator.clipboard.writeText("saad.shabir@hotmail.com");
-      setEmailCopied(true);
-      
-      // Clear any existing timeout
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-      
-      // Set new timeout with ref
-      timeoutRef.current = setTimeout(() => {
-        setEmailCopied(false);
-        timeoutRef.current = null;
-      }, 2000);
-    } catch (err) {
-      console.error("Failed to copy email:", err);
-    }
-  };
 
   const projects = [
     {
@@ -101,16 +70,7 @@ export default function Projects() {
   return (
     <div className="w-screen h-screen flex flex-col bg-zinc-50 dark:bg-zinc-900">
       {/* Navigation */}
-      <nav className="flex justify-end items-center px-4 md:px-8 py-6 pr-4 md:pr-8">
-        <div className="flex gap-4 md:gap-8">
-          <Link href="/" className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors" aria-label="Home page">
-            home
-          </Link>
-          <Link href="/projects" className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50 transition-colors" aria-label="Projects page" aria-current="page">
-            projects
-          </Link>
-        </div>
-      </nav>
+      <Navigation currentPage="projects" />
 
       {/* Projects Content */}
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 md:px-8 py-6 md:py-8 overflow-y-auto">
@@ -152,49 +112,7 @@ export default function Projects() {
       </main>
 
       {/* Footer */}
-      <footer className="px-4 md:px-8 py-4 md:py-6 pb-8 md:pb-6">
-        <div className="flex flex-wrap gap-4 md:gap-8">
-          <a
-            href="/MuhammadSaad_Shabir_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
-            aria-label="Download resume (opens in new tab)"
-          >
-            resume
-          </a>
-          <button
-            onClick={copyEmail}
-            className="relative text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors cursor-pointer bg-transparent border-none p-0"
-            aria-label="Copy email address to clipboard"
-          >
-            email
-            {emailCopied && (
-              <span className="absolute -top-10 left-0 bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 text-sm px-3 py-2 rounded shadow-lg animate-fade-in whitespace-nowrap" role="status" aria-live="polite">
-                Copied!
-              </span>
-            )}
-          </button>
-          <a
-            href="https://www.linkedin.com/in/msaadshabir/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
-            aria-label="LinkedIn profile (opens in new tab)"
-          >
-            linkedin
-          </a>
-          <a
-            href="https://github.com/msaadshabir"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
-            aria-label="GitHub profile (opens in new tab)"
-          >
-            github
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
