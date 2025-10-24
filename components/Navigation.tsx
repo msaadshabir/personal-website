@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useCallback } from "react";
 import { NAV_LINK_STYLES } from "@/lib/constants";
 
 interface NavigationProps {
@@ -8,8 +9,11 @@ interface NavigationProps {
 }
 
 export function Navigation({ currentPage }: NavigationProps) {
-  const getLinkClassName = (isActive: boolean) =>
-    `${NAV_LINK_STYLES.base} ${isActive ? NAV_LINK_STYLES.active : NAV_LINK_STYLES.inactive}`;
+  const getLinkClassName = useCallback(
+    (isActive: boolean) =>
+      `${NAV_LINK_STYLES.base} ${isActive ? NAV_LINK_STYLES.active : NAV_LINK_STYLES.inactive}`,
+    []
+  );
 
   return (
     <nav className="flex justify-end items-center px-4 md:px-8 py-6 pr-4 md:pr-8">

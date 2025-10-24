@@ -1,5 +1,7 @@
+import { memo } from 'react';
+
 // Sun icon SVG
-export function SunIcon() {
+export const SunIcon = memo(function SunIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -23,10 +25,10 @@ export function SunIcon() {
       <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
     </svg>
   );
-}
+});
 
 // Moon icon SVG
-export function MoonIcon() {
+export const MoonIcon = memo(function MoonIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -42,4 +44,4 @@ export function MoonIcon() {
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   );
-}
+});
