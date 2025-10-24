@@ -1,6 +1,6 @@
 "use client";
 
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, FOOTER_LINK_STYLES } from "@/lib/constants";
 import { useEmailCopy } from "@/hooks/useEmailCopy";
 
 export function Footer() {
@@ -13,14 +13,14 @@ export function Footer() {
           href={SITE_CONFIG.resume}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+          className={FOOTER_LINK_STYLES}
           aria-label="Download resume (opens in new tab)"
         >
           resume
         </a>
         <button
           onClick={copyEmail}
-          className="relative text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors cursor-pointer bg-transparent border-none p-0"
+          className={`relative ${FOOTER_LINK_STYLES} cursor-pointer bg-transparent border-none p-0`}
           aria-label="Copy email address to clipboard"
         >
           email
@@ -38,7 +38,7 @@ export function Footer() {
           href={SITE_CONFIG.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+          className={FOOTER_LINK_STYLES}
           aria-label="LinkedIn profile (opens in new tab)"
         >
           linkedin
@@ -47,7 +47,7 @@ export function Footer() {
           href={SITE_CONFIG.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+          className={FOOTER_LINK_STYLES}
           aria-label="GitHub profile (opens in new tab)"
         >
           github

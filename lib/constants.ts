@@ -13,6 +13,9 @@ export const NAV_LINK_STYLES = {
   base: "text-xl md:text-2xl transition-colors",
 } as const;
 
+// Footer link styles
+export const FOOTER_LINK_STYLES = "text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors" as const;
+
 // Projects data
 export const PROJECTS = [
   {

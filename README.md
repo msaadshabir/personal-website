@@ -16,6 +16,7 @@ Modern portfolio showcasing projects and professional experience.
 - TypeScript 5
 - Tailwind CSS 3
 - Inter Font (next/font/google)
+- Vercel Analytics & Speed Insights
 
 ## Features
 
@@ -35,14 +36,8 @@ Modern portfolio showcasing projects and professional experience.
 - Modern browser targeting
 - Zero runtime dependencies
 - Memoized components
-
-## Code Quality
-
-- Fully typed TypeScript
-- Shared components (Navigation, Footer)
-- Centralized configuration constants
-- Custom hooks for reusable logic
-- Clean, maintainable architecture
+- Vercel Web Analytics for visitor insights
+- Vercel Speed Insights for performance monitoring
 
 ## License
 
