@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsightsWrapper } from '../components/SpeedInsightsWrapper';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ThemeProvider } from '../components/ThemeProvider';
 import { ThemeToggle } from '../components/ThemeToggle';
 import "./globals.css";
@@ -36,11 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="antialiased min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 font-sans">
-        <SpeedInsightsWrapper />
         <ThemeProvider>
           <ThemeToggle />
           {children}
         </ThemeProvider>
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>
