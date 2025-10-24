@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SpeedInsightsWrapper } from '../components/SpeedInsightsWrapper';
 import { ThemeProvider } from '../components/ThemeProvider';
 import { ThemeToggle } from '../components/ThemeToggle';
 import "./globals.css";
@@ -41,7 +41,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <Analytics />
-        <SpeedInsights />
+        <SpeedInsightsWrapper />
       </body>
     </html>
   );
