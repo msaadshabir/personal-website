@@ -2,6 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 
+const MAX_RETRIES = 3;
+const INITIAL_DELAY = 100; // ms
+
 export function useEmailCopy(email: string) {
   const [emailCopied, setEmailCopied] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -15,7 +18,7 @@ export function useEmailCopy(email: string) {
     };
   }, []);
 
-  const copyEmail = async (e: React.MouseEvent) => {
+  const copyEmail = async (e: React.MouseEvent, retries = 0): Promise<void> => {
     e.preventDefault();
     try {
       await navigator.clipboard.writeText(email);
@@ -32,7 +35,14 @@ export function useEmailCopy(email: string) {
         timeoutRef.current = null;
       }, 2000);
     } catch (err) {
-      console.error("Failed to copy email:", err);
+      // Retry with exponential backoff
+      if (retries < MAX_RETRIES) {
+        const delay = INITIAL_DELAY * Math.pow(2, retries);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        await copyEmail(e, retries + 1);
+      } else {
+        console.error("Failed to copy email after retries:", err);
+      }
     }
   };
 

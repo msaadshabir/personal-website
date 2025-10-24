@@ -1,6 +1,6 @@
 # Personal Website
 
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18-blue?style=flat&logo=react&logoColor=white)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
@@ -11,26 +11,38 @@ Modern portfolio showcasing projects and professional experience.
 
 ## Tech Stack
 
-- Next.js 14 (App Router)
+- Next.js 16 (App Router, Turbopack)
 - React 18
-- TypeScript
-- Tailwind CSS
+- TypeScript 5
+- Tailwind CSS 3
 - Inter Font (next/font/google)
 
 ## Features
 
-- Dark/Light theme with persistence
-- Click-to-copy email
-- Responsive design
-- SEO optimized
-- Accessibility compliant
+- Dark/Light theme with localStorage persistence
+- Click-to-copy email with retry logic
+- Fully responsive design
+- SEO optimized with dynamic metadata
+- Accessibility compliant (WCAG 2.1)
+- Icon-based theme toggle (Sun/Moon)
+- Static site generation
 
 ## Performance
 
-- Static site generation
-- Optimized fonts
+- Turbopack for fast builds and dev server
+- Static site generation (SSG)
+- Optimized fonts with display=swap
 - Modern browser targeting
-- Zero external dependencies
+- Zero runtime dependencies
+- Memoized components
+
+## Code Quality
+
+- Fully typed TypeScript
+- Shared components (Navigation, Footer)
+- Centralized configuration constants
+- Custom hooks for reusable logic
+- Clean, maintainable architecture
 
 ## License
 
