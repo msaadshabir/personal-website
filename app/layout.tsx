@@ -36,12 +36,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="antialiased min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 font-sans">
+        <SpeedInsightsWrapper />
         <ThemeProvider>
           <ThemeToggle />
           {children}
         </ThemeProvider>
         <Analytics />
-        <SpeedInsightsWrapper />
       </body>
     </html>
   );
