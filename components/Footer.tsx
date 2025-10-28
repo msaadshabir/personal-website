@@ -1,9 +1,10 @@
 "use client";
 
+import { memo } from "react";
 import { SITE_CONFIG, FOOTER_LINK_STYLES } from "@/lib/constants";
 import { useEmailCopy } from "@/hooks/useEmailCopy";
 
-export function Footer() {
+function FooterComponent() {
   const { emailCopied, copyEmail } = useEmailCopy(SITE_CONFIG.email);
 
   return (
@@ -20,19 +21,10 @@ export function Footer() {
         </a>
         <button
           onClick={copyEmail}
-          className={`relative ${FOOTER_LINK_STYLES} cursor-pointer bg-transparent border-none p-0`}
+          className={`${FOOTER_LINK_STYLES} cursor-pointer bg-transparent border-none p-0 inline-block w-[4.5rem] text-left`}
           aria-label="Copy email address to clipboard"
         >
-          email
-          {emailCopied && (
-            <span
-              className="absolute -top-10 left-0 bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 text-sm px-3 py-2 rounded shadow-lg animate-fade-in whitespace-nowrap"
-              role="status"
-              aria-live="polite"
-            >
-              Copied!
-            </span>
-          )}
+          {emailCopied ? "copied!" : "email"}
         </button>
         <a
           href={SITE_CONFIG.linkedin}
@@ -56,3 +48,5 @@ export function Footer() {
     </footer>
   );
 }
+
+export const Footer = memo(FooterComponent);

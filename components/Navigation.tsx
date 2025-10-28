@@ -1,14 +1,14 @@
 "use client";
 
+import { memo, useCallback } from "react";
 import Link from "next/link";
-import { useCallback } from "react";
 import { NAV_LINK_STYLES } from "@/lib/constants";
 
 interface NavigationProps {
   currentPage: "home" | "projects";
 }
 
-export function Navigation({ currentPage }: NavigationProps) {
+function NavigationComponent({ currentPage }: NavigationProps) {
   const getLinkClassName = useCallback(
     (isActive: boolean) =>
       `${NAV_LINK_STYLES.base} ${isActive ? NAV_LINK_STYLES.active : NAV_LINK_STYLES.inactive}`,
@@ -38,3 +38,5 @@ export function Navigation({ currentPage }: NavigationProps) {
     </nav>
   );
 }
+
+export const Navigation = memo(NavigationComponent);

@@ -9,12 +9,12 @@ export const SITE_CONFIG = {
 // Navigation link styles
 export const NAV_LINK_STYLES = {
   active: "font-bold text-zinc-900 dark:text-zinc-50",
-  inactive: "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50",
+  inactive: "text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200",
   base: "text-xl md:text-2xl transition-colors",
 } as const;
 
 // Footer link styles
-export const FOOTER_LINK_STYLES = "text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors" as const;
+export const FOOTER_LINK_STYLES = "text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200" as const;
 
 // Projects data
 export const PROJECTS = [

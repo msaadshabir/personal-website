@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, memo } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { useTheme } from './ThemeProvider';
 import { SunIcon, MoonIcon } from './Icons';
 
@@ -25,7 +25,7 @@ function ThemeToggleComponent() {
     <div className="absolute top-6 left-6 z-50">
       <button
         onClick={toggleTheme}
-        className="text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors"
+        className="text-zinc-900 dark:text-zinc-50 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200"
         aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
         title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
       >

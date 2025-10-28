@@ -5,5 +5,23 @@
   "display": "standalone",
   "background_color": "#fafafa",
   "theme_color": "#fafafa",
-  "description": "Focusing on network architecture, protocol analysis, and system programming."
-} 
+  "description": "Focusing on network architecture, protocol analysis, and system programming.",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["portfolio", "technology", "networking"],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-narrow.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}

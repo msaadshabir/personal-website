@@ -18,5 +18,11 @@ const config: Config = {
   future: {
     hoverOnlyWhenSupported: true,
   },
+  // Performance optimizations
+  corePlugins: {
+    preflight: true,
+  },
+  // Safelist for dynamic classes
+  safelist: [],
 };
 export default config;
