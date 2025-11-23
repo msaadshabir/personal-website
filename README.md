@@ -20,12 +20,12 @@ Modern portfolio showcasing projects and professional experience.
 
 ## Features
 
+- Single-page portfolio layout
 - Dark/Light theme with localStorage persistence
-- Click-to-copy email with retry logic
+- Click-to-copy email interaction
 - Fully responsive design
 - SEO optimized with dynamic metadata
 - Accessibility compliant (WCAG 2.1)
-- Icon-based theme toggle (Sun/Moon)
 - Static site generation
 
 ## Performance
@@ -34,8 +34,7 @@ Modern portfolio showcasing projects and professional experience.
 - Static site generation (SSG)
 - Optimized fonts with display=swap
 - Modern browser targeting
-- Zero runtime dependencies
-- Memoized components
+- Minimal runtime dependencies
 - Vercel Web Analytics for visitor insights
 - Vercel Speed Insights for performance monitoring
 

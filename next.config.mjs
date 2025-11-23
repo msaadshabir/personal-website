@@ -6,10 +6,6 @@ const nextConfig = {
   },
   // Next.js 16 uses Turbopack by default
   turbopack: {},
-  // Optimize CSS
-  experimental: {
-    optimizeCss: true,
-  },
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],

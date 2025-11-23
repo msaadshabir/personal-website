@@ -6,16 +6,6 @@ export const SITE_CONFIG = {
   resume: "/MuhammadSaad_Shabir_Resume.pdf",
 } as const;
 
-// Navigation link styles
-export const NAV_LINK_STYLES = {
-  active: "font-bold text-zinc-900 dark:text-zinc-50",
-  inactive: "text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200",
-  base: "text-xl md:text-2xl transition-colors",
-} as const;
-
-// Footer link styles
-export const FOOTER_LINK_STYLES = "text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors duration-200" as const;
-
 // Projects data
 export const PROJECTS = [
   {
@@ -66,5 +56,18 @@ export const PROJECTS = [
     url: "https://github.com/msaadshabir/personal-website",
     description: "Modern portfolio showcasing projects and professional experience.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "React", "Vercel"],
+  },
+] as const;
+
+// Experience data
+export const EXPERIENCE = [
+  {
+    position: "Network Technician",
+    company: "AriesTECH",
+    dates: "January 2024 - April 2025",
+    description: [
+      "Installed and configured Cisco routers & switches, designed network segmentation, and maintained ~99% uptime through proactive monitoring and diagnostics.",
+    ],
+    link: "#",
   },
 ] as const;

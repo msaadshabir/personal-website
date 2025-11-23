@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { ThemeProvider } from '../components/ThemeProvider';
-import { ThemeToggle } from '../components/ThemeToggle';
 import "./globals.css";
 
 const inter = Inter({
@@ -31,10 +29,13 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
+  },
+  verification: {
+    google: 'google-site-verification-code', // Replace with actual code if available
   },
   openGraph: {
     title: "Muhammad Saad Shabir",
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     canonical: "https://msaadshabir.vercel.app/",
   },
   other: {
-    "application/ld+json": JSON.stringify({
+    "script:ld+json": JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Muhammad Saad Shabir",
@@ -82,7 +83,6 @@ export const viewport = {
   maximumScale: 1,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#18181b" },
   ],
 };
 
@@ -93,11 +93,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="antialiased min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 font-sans">
-        <ThemeProvider>
-          <ThemeToggle />
+      <body className="antialiased min-h-screen bg-zinc-50 text-zinc-700 font-sans tracking-tight">
           {children}
-        </ThemeProvider>
         <SpeedInsights />
         <Analytics />
       </body>

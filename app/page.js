@@ -1,73 +1,90 @@
-"use client";
-
-import { useEffect } from "react";
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
-import { SITE_CONFIG } from "@/lib/constants";
+import React from "react";
+import ExperienceCard from "@/components/ExperienceCard";
+import ProjectCard from "@/components/ProjectCard";
+import EmailButton from "@/components/EmailButton";
+import { EXPERIENCE, PROJECTS, SITE_CONFIG } from "@/lib/constants";
 
 export default function Home() {
-  // Set page title
-  useEffect(() => {
-    document.title = `Home | ${SITE_CONFIG.name}`;
-  }, []);
-
   return (
-    <div className="w-screen h-screen flex flex-col bg-zinc-50 dark:bg-zinc-900">
-      {/* Navigation */}
-      <Navigation currentPage="home" />
-
-      {/* Main Content - Two Column Layout */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 md:px-8 flex items-start overflow-y-auto md:overflow-hidden pt-4 md:pt-16 pb-4 md:pb-0">
-        <div className="w-full flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-20">
-          {/* Left Column - Bio */}
-          <div className="lg:flex-[2] space-y-6 md:space-y-8">
-            <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-zinc-900 dark:text-zinc-50 leading-tight">
-                Hi, I'm Muhammad Saad Shabir
-              </h1>
-              
-              <div className="space-y-2 text-base md:text-lg text-zinc-600 dark:text-zinc-400">
-                <p>
-                  Focusing on network architecture, protocol analysis, and system programming
-                </p>
-                <p>
-                  Currently exploring new experiences
-                </p>
-                <p>
-                  Previously at <span className="font-semibold text-zinc-900 dark:text-zinc-50">AriesTECH</span>
-                </p>
-                <p>
-                  Studying BIT NET at <span className="font-semibold text-zinc-900 dark:text-zinc-50">Carleton University</span>
-                </p>
+    <main className="flex w-full min-h-screen flex-col items-center font-sans px-8 bg-background text-foreground">
+      <div className="z-50 flex w-full flex-col items-start gap-8 px-4 pt-32 pb-48 text-md md:w-3/4 lg:w-1/2">
+        <section className="flex flex-col gap-8">
+                    <h2 className="font-bold">Hi, I'm Muhammad Saad Shabir</h2>
+          <div className="space-y-4">
+            <p>
+              Focusing on network architecture, protocol analysis, and system programming
+            </p>
+            <p>
+              Studying BIT NET at <span className="font-semibold text-foreground">Carleton University</span>
+            </p>
+            <p>
+              Currently exploring new experiences
+            </p>
+            <div className="space-y-1 pt-2">
+              <p className="font-bold">Thinking about</p>
+              <div className="flex flex-wrap gap-6">
+                <span>Attention</span>
+                <span>Natural selection</span>
+                <span>Superforecasting</span>
               </div>
             </div>
-
-            <div className="space-y-3">
-              <p className="text-base md:text-lg font-bold text-zinc-900 dark:text-zinc-50">Thinking about</p>
-              <div className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 space-y-1">
-                <p>Attention</p>
-                <p>Natural selection</p>
-                <p>Superforecasting</p>
-              </div>
-              <p className="text-base italic text-zinc-600 dark:text-zinc-400 pt-4">
-                Let's venture into greatness before AGI makes us the permanent underclass :)
-              </p>
-            </div>
+            <p className="italic pt-2">
+              Let's venture into greatness before AGI makes us the permanent underclass :)
+            </p>
           </div>
-
-          {/* Right Column - Experience */}
-          <div className="lg:flex-[1] space-y-4 md:space-y-6">
-            <div className="space-y-2">
-              <p className="text-base md:text-lg font-bold text-zinc-900 dark:text-zinc-50">AriesTECH</p>
-              <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400">Network Technician</p>
-              <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400">Installed and configured Cisco routers & switches, designed network segmentation, and maintained ~99% uptime through proactive monitoring and diagnostics.</p>
-            </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <EmailButton />
+            <a 
+              href={SITE_CONFIG.linkedin} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a 
+              href={SITE_CONFIG.github} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              GitHub
+            </a>
+            <a 
+              href={SITE_CONFIG.resume} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Resume
+            </a>
           </div>
-        </div>
-      </main>
+        </section>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        <section className="flex w-full flex-col gap-8">
+          <h1 className="text-xl font-bold text-accent-foreground">Work</h1>
+          <div className="flex w-full flex-col gap-2">
+            {EXPERIENCE.map((item, index) => (
+              <ExperienceCard key={index} {...item} />
+            ))}
+          </div>
+        </section>
+
+        <section className="flex w-full flex-col gap-8">
+          <h1 className="text-xl font-bold text-accent-foreground">Projects</h1>
+          <div className="flex w-full flex-col gap-2">
+            {PROJECTS.map((item, index) => (
+              <ProjectCard 
+                key={index} 
+                title={item.name}
+                date={item.tags.join(" • ")}
+                description={item.description}
+                link={item.url}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
