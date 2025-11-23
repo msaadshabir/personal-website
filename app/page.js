@@ -38,7 +38,7 @@ export default function Home() {
               href={SITE_CONFIG.linkedin} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               LinkedIn
             </a>
@@ -46,7 +46,7 @@ export default function Home() {
               href={SITE_CONFIG.github} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               GitHub
             </a>
@@ -54,7 +54,7 @@ export default function Home() {
               href={SITE_CONFIG.resume} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               Resume
             </a>
