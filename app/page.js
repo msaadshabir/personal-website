@@ -20,17 +20,6 @@ export default function Home() {
             <p>
               Currently exploring new experiences
             </p>
-            <div className="space-y-1 pt-2">
-              <p className="font-bold">Thinking about</p>
-              <div className="flex flex-wrap gap-6">
-                <span>Attention</span>
-                <span>Natural selection</span>
-                <span>Superforecasting</span>
-              </div>
-            </div>
-            <p className="italic pt-2">
-              Let's venture into greatness before AGI makes us the permanent underclass :)
-            </p>
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <EmailButton />
