@@ -5,19 +5,19 @@
 @layer base {
   :root {
     --background: oklch(0.9736 0.0017 67.8);
-    --foreground: oklch(0.145 0 0);
+    --foreground: #1d1d1f;
     --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
+    --card-foreground: #1d1d1f;
     --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
+    --popover-foreground: #1d1d1f;
     --primary: oklch(0.205 0 0);
     --primary-foreground: oklch(0.985 0 0);
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
     --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
+    --muted-foreground: #86868b;
     --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.3942 0 0);
+    --accent-foreground: #1d1d1f;
     --destructive: oklch(0.577 0.245 27.325);
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);

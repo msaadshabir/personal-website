@@ -12,13 +12,13 @@ export default function Home() {
                     <h2 className="font-bold">Hi, I'm Muhammad Saad Shabir.</h2>
           <div className="space-y-4">
             <p>
-              Focusing on network architecture, protocol analysis, and system programming
+              Focusing on network architecture, protocol analysis, and system programming.
             </p>
             <p>
-              Studying BIT NET at <span className="font-semibold text-foreground">Carleton University</span>
+              Studying BIT NET at <span className="font-semibold text-foreground">Carleton University</span>.
             </p>
             <p>
-              Currently exploring new experiences
+              Currently exploring new experiences.
             </p>
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
@@ -51,7 +51,7 @@ export default function Home() {
         </section>
 
         <section className="flex w-full flex-col gap-8">
-          <h1 className="text-xl font-bold text-accent-foreground">Work</h1>
+          <h1 className="text-xl font-bold text-foreground">Work</h1>
           <div className="flex w-full flex-col gap-2">
             {EXPERIENCE.map((item, index) => (
               <ExperienceCard key={index} {...item} />
@@ -60,7 +60,7 @@ export default function Home() {
         </section>
 
         <section className="flex w-full flex-col gap-8">
-          <h1 className="text-xl font-bold text-accent-foreground">Projects</h1>
+          <h1 className="text-xl font-bold text-foreground">Projects</h1>
           <div className="flex w-full flex-col gap-2">
             {PROJECTS.map((item, index) => (
               <ProjectCard 
