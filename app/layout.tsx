@@ -34,9 +34,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'google-site-verification-code', // Replace with actual code if available
-  },
   openGraph: {
     title: "Muhammad Saad Shabir",
     description: "Focusing on network architecture, protocol analysis, and system programming. Network engineering and system programming projects.",

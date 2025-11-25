@@ -4,7 +4,7 @@ interface ExperienceCardProps {
   position: string;
   company: string;
   dates: string;
-  description: string[];
+  description: readonly string[];
   link: string;
 }
 

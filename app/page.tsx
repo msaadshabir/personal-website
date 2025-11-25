@@ -1,15 +1,14 @@
-import React from "react";
 import ExperienceCard from "@/components/ExperienceCard";
 import ProjectCard from "@/components/ProjectCard";
 import EmailButton from "@/components/EmailButton";
 import { EXPERIENCE, PROJECTS, SITE_CONFIG } from "@/lib/constants";
 
-export default function Home() {
+export default function Home(): React.JSX.Element {
   return (
     <main className="flex w-full min-h-screen flex-col items-center font-sans px-8 bg-background text-foreground">
       <div className="z-50 flex w-full flex-col items-start gap-8 px-4 pt-32 pb-48 text-md md:w-3/4 lg:w-1/2">
         <section className="flex flex-col gap-8">
-                    <h2 className="font-bold">Hi, I'm Muhammad Saad Shabir.</h2>
+          <h2 className="font-bold">Hi, I&apos;m Muhammad Saad Shabir.</h2>
           <div className="space-y-4">
             <p>
               Focusing on network architecture, protocol analysis, and system programming.
@@ -27,6 +26,7 @@ export default function Home() {
               href={SITE_CONFIG.linkedin} 
               target="_blank" 
               rel="noopener noreferrer"
+              aria-label="Visit LinkedIn profile"
               className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               LinkedIn
@@ -35,6 +35,7 @@ export default function Home() {
               href={SITE_CONFIG.github} 
               target="_blank" 
               rel="noopener noreferrer"
+              aria-label="Visit GitHub profile"
               className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               GitHub
@@ -43,6 +44,7 @@ export default function Home() {
               href={SITE_CONFIG.resume} 
               target="_blank" 
               rel="noopener noreferrer"
+              aria-label="Download resume PDF"
               className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               Resume
@@ -53,8 +55,8 @@ export default function Home() {
         <section className="flex w-full flex-col gap-8">
           <h1 className="text-xl font-bold text-foreground">Work</h1>
           <div className="flex w-full flex-col gap-2">
-            {EXPERIENCE.map((item, index) => (
-              <ExperienceCard key={index} {...item} />
+            {EXPERIENCE.map((item) => (
+              <ExperienceCard key={`${item.company}-${item.position}`} {...item} />
             ))}
           </div>
         </section>
@@ -62,9 +64,9 @@ export default function Home() {
         <section className="flex w-full flex-col gap-8">
           <h1 className="text-xl font-bold text-foreground">Projects</h1>
           <div className="flex w-full flex-col gap-2">
-            {PROJECTS.map((item, index) => (
+            {PROJECTS.map((item) => (
               <ProjectCard 
-                key={index} 
+                key={item.id} 
                 title={item.name}
                 date={item.tags.join(" • ")}
                 description={item.description}
