@@ -33,7 +33,7 @@ export const PROJECTS = [
     id: "004",
     name: "net-guardian",
     url: "https://github.com/msaadshabir/net-guardian",
-    description: "net-guardian is a command-line tool in Python that scans your local network, inventories devices, and assesses security risks. It merges network scanning, OS/service detection, and anomaly detection into one lightweight auditor.",
+    description: "An automated network health and security auditor built with Python. Scans your local network, identifies devices, checks for open ports, detects anomalies using machine learning, and flags potential security risks.",
     tags: ["Python", "Scapy", "Nmap", "Rich", "pandas", "scikit-learn"],
   },
   {
