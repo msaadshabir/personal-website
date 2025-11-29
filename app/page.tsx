@@ -1,6 +1,7 @@
 import ExperienceCard from "@/components/ExperienceCard";
 import ProjectCard from "@/components/ProjectCard";
 import EmailButton from "@/components/EmailButton";
+import CollapsibleSection from "@/components/CollapsibleSection";
 import { EXPERIENCE, PROJECTS, SITE_CONFIG } from "@/lib/constants";
 
 export default function Home(): React.JSX.Element {
@@ -52,29 +53,23 @@ export default function Home(): React.JSX.Element {
           </div>
         </section>
 
-        <section className="flex w-full flex-col gap-8">
-          <h1 className="text-xl font-bold text-foreground">Work</h1>
-          <div className="flex w-full flex-col gap-2">
-            {EXPERIENCE.map((item) => (
-              <ExperienceCard key={`${item.company}-${item.position}`} {...item} />
-            ))}
-          </div>
-        </section>
+        <CollapsibleSection title="Work">
+          {EXPERIENCE.map((item) => (
+            <ExperienceCard key={`${item.company}-${item.position}`} {...item} />
+          ))}
+        </CollapsibleSection>
 
-        <section className="flex w-full flex-col gap-8">
-          <h1 className="text-xl font-bold text-foreground">Projects</h1>
-          <div className="flex w-full flex-col gap-2">
-            {PROJECTS.map((item) => (
-              <ProjectCard 
-                key={item.id} 
-                title={item.name}
-                date={item.tags.join(" • ")}
-                description={item.description}
-                link={item.url}
-              />
-            ))}
-          </div>
-        </section>
+        <CollapsibleSection title="Projects">
+          {PROJECTS.map((item) => (
+            <ProjectCard 
+              key={item.id} 
+              title={item.name}
+              date={item.tags.join(" • ")}
+              description={item.description}
+              link={item.url}
+            />
+          ))}
+        </CollapsibleSection>
       </div>
     </main>
   );

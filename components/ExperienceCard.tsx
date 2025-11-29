@@ -8,12 +8,15 @@ interface ExperienceCardProps {
   link: string;
 }
 
+const cardStyles = "relative w-full rounded-lg p-4 group";
+const hoverOverlay = "absolute inset-0 bg-gradient-to-r from-[#F2F2F2] to-[#D9D9D9] opacity-0 group-hover:opacity-50 transition-opacity duration-150 rounded-lg";
+
 export default function ExperienceCard({ position, company, dates, description, link }: ExperienceCardProps) {
-  const Content = () => (
+  const content = (
     <>
-      <div className="absolute inset-0 bg-gradient-to-r from-[#F2F2F2] to-[#D9D9D9] opacity-0 group-hover:opacity-50 transition-opacity duration-150 ease-in-out rounded-lg backdrop-blur-md"></div>
-      <div className="relative flex flex-col items-start justify-start gap-2 text-md">
-        <h2 className="font-bold text-foreground">{position} @ {company}</h2>
+      <div className={hoverOverlay} />
+      <div className="relative flex flex-col gap-2">
+        <h3 className="font-bold text-foreground">{position} @ {company}</h3>
         <p className="font-medium text-muted-foreground">{dates}</p>
         {description.map((item, index) => (
           <p key={index} className="font-medium text-foreground">{item}</p>
@@ -24,15 +27,11 @@ export default function ExperienceCard({ position, company, dates, description, 
 
   if (link && link !== "#") {
     return (
-      <Link href={link} className="relative w-full rounded-lg p-4 transition-all duration-150 ease-in-out group z-50 backdrop-blur-md">
-        <Content />
+      <Link href={link} className={cardStyles}>
+        {content}
       </Link>
     );
   }
 
-  return (
-    <div className="relative w-full rounded-lg p-4 transition-all duration-150 ease-in-out group z-50 backdrop-blur-md">
-      <Content />
-    </div>
-  );
+  return <div className={cardStyles}>{content}</div>;
 }

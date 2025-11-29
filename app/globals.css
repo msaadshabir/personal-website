@@ -6,31 +6,14 @@
   :root {
     --background: oklch(0.9736 0.0017 67.8);
     --foreground: #1d1d1f;
-    --card: oklch(1 0 0);
-    --card-foreground: #1d1d1f;
-    --popover: oklch(1 0 0);
-    --popover-foreground: #1d1d1f;
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
     --muted-foreground: #86868b;
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: #1d1d1f;
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --radius: 0.625rem;
   }
 
   html {
     scroll-behavior: smooth;
   }
-  
-  html, body {
-    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  body {
     font-feature-settings: "cv01", "cv05", "zero", "tnum";
     @apply bg-background text-foreground;
   }
