@@ -21,6 +21,7 @@ Modern portfolio showcasing projects and professional experience.
 ## Features
 
 - Single-page portfolio layout
+- Collapsible Work & Projects sections
 - Click-to-copy email interaction
 - Fully responsive design
 - SEO optimized with structured data (JSON-LD)
