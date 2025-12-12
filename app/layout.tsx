@@ -92,7 +92,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="antialiased min-h-screen bg-zinc-50 text-zinc-700 font-sans tracking-tight">
-          {children}
+        {children}
         <SpeedInsights />
         <Analytics />
       </body>
