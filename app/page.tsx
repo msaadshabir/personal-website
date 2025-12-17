@@ -9,15 +9,15 @@ export default function Home(): React.JSX.Element {
     <main className="flex w-full min-h-screen flex-col items-center font-sans px-8 bg-background text-foreground">
       <div className="z-50 flex w-full flex-col items-start gap-8 px-4 pt-32 pb-48 text-base md:w-3/4 lg:w-1/2">
         <section className="flex flex-col gap-8">
-          <h2 className="font-bold">Hi, I&apos;m Muhammad Saad Shabir.</h2>
+          <h2 className="font-semibold tracking-[-0.02em] text-foreground">Hi, I&apos;m Muhammad Saad Shabir.</h2>
           <div className="space-y-4">
-            <p>
+            <p className="text-lg leading-relaxed">
               Focusing on network architecture, protocol analysis, and system programming.
             </p>
-            <p>
+            <p className="text-lg leading-relaxed">
               Studying BIT NET at <span className="font-semibold text-foreground">Carleton University</span>.
             </p>
-            <p>
+            <p className="text-lg leading-relaxed">
               Currently exploring new experiences.
             </p>
           </div>
