@@ -66,7 +66,7 @@ export const EXPERIENCE = [
     company: "AriesTECH",
     dates: "January 2024 - April 2025",
     description: [
-      "Installed and configured Cisco routers & switches, designed network segmentation, and maintained ~99% uptime through proactive monitoring and diagnostics.",
+      "Maintained 99% uptime for Cisco infrastructure through advanced routing and monitoring, while implementing Python automation to reduce manual configuration time by 30%.",
     ],
     link: "#",
   },
