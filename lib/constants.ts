@@ -12,8 +12,8 @@ export const PROJECTS = [
     id: "001",
     name: "ZTAP",
     url: "https://github.com/msaadshabir/ZTAP",
-    description: "Zero-trust access and microsegmentation tool with eBPF-based enforcement and policy-as-code. Secures internal services through identity-aware access, kernel-level filtering, and hybrid-cloud support. Built for auditability and aligned with Zero Trust principles.",
-    tags: ["Go", "eBPF", "Kubernetes", "Hybrid Cloud", "Policy-as-Code", "Prometheus", "Grafana", "NIST SP 800-207"],
+    description: "Cross-platform zero-trust microsegmentation engine enforcing network policies at the kernel level (eBPF, WFP, pf) with etcd-backed policy distribution and hybrid cloud security orchestration (AWS/GCP/Azure).",
+    tags: ["Go", "eBPF (CO-RE)", "Windows Filtering Platform (WFP)", "etcd", "gRPC", "Prometheus", "AWS/Azure/GCP", "Kubernetes"],
   },
   {
     id: "002",
