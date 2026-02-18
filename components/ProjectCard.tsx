@@ -18,7 +18,7 @@ export default function ProjectCard({ title, date, description, link }: ProjectC
       <div className="absolute inset-0 bg-gradient-to-r from-[#F2F2F2] to-[#D9D9D9] opacity-0 group-hover:opacity-50 transition-opacity duration-150 rounded-lg" />
       <div className="relative flex flex-col gap-2">
         <h3 className="font-bold text-foreground">{title}</h3>
-        {date && <p className="font-medium text-muted-foreground">{date}</p>}
+        <p className="font-medium text-muted-foreground">{date}</p>
         <p className="font-medium text-foreground">{description}</p>
       </div>
     </Link>

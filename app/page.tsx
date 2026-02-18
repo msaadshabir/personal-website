@@ -63,8 +63,8 @@ export default function Home(): React.JSX.Element {
           {PROJECTS.map((item) => (
             <ProjectCard 
               key={item.id} 
-              title={item.tags.length > 0 ? `${item.name} | ${item.tags.join(" · ")}` : item.name}
-              date=""
+              title={item.name}
+              date={item.tags.join(" • ")}
               description={item.description}
               link={item.url}
             />
