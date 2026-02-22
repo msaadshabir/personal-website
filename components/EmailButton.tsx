@@ -1,15 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export default function EmailButton() {
   const [isCopied, setIsCopied] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const handleEmailClick = () => {
     navigator.clipboard.writeText(SITE_CONFIG.email);
     setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
+    
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setIsCopied(false), 2000);
   };
 
   return (

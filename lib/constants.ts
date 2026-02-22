@@ -43,7 +43,6 @@ export const PROJECTS = [
     description: "A terminal-based, self-hosted personal AI chatbot powered by RAG. Chat with your own documents using local LLMs via Ollama. No cloud, no tracking, fully private.",
     tags: ["Python", "Local LLM (Ollama)", "RAG", "CLI"],
   },
-  /*
   {
     id: "006",
     name: "CloudChat",
@@ -51,16 +50,6 @@ export const PROJECTS = [
     description: "A modern Twitter/X clone built with Next.js 15, React 19, and TypeScript. Features real-time updates, infinite scroll, optimistic UI, and Clerk authentication.",
     tags: ["Next.js", "React", "TypeScript", "Clerk", "Full-stack"],
   },
-  */
-  /*
-  {
-    id: "007",
-    name: "personal-website",
-    url: "https://github.com/msaadshabir/personal-website",
-    description: "Modern portfolio showcasing projects and professional experience.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "React", "Vercel"],
-  },
-  */
 ] as const;
 
 // Experience data
