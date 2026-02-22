@@ -1,6 +1,8 @@
-import Link from "next/link";
+import ExperienceCard from "@/components/ExperienceCard";
+import ProjectCard from "@/components/ProjectCard";
 import EmailButton from "@/components/EmailButton";
-import { SITE_CONFIG } from "@/lib/constants";
+import CollapsibleSection from "@/components/CollapsibleSection";
+import { EXPERIENCE, PROJECTS, SITE_CONFIG } from "@/lib/constants";
 
 export default function Home(): React.JSX.Element {
   return (
@@ -63,23 +65,23 @@ export default function Home(): React.JSX.Element {
           </div>
         </section>
 
-        <section className="flex flex-col gap-4 w-full">
-          <Link 
-            href="/work"
-            className="group flex items-center justify-between py-4 border-b border-border hover:border-foreground transition-colors"
-          >
-            <h3 className="text-xl font-medium text-foreground">Work</h3>
-            <span className="text-muted-foreground group-hover:text-foreground transition-colors">→</span>
-          </Link>
-          
-          <Link 
-            href="/projects"
-            className="group flex items-center justify-between py-4 border-b border-border hover:border-foreground transition-colors"
-          >
-            <h3 className="text-xl font-medium text-foreground">Projects</h3>
-            <span className="text-muted-foreground group-hover:text-foreground transition-colors">→</span>
-          </Link>
-        </section>
+        <CollapsibleSection title="Work">
+          {EXPERIENCE.map((item) => (
+            <ExperienceCard key={`${item.company}-${item.position}`} {...item} />
+          ))}
+        </CollapsibleSection>
+
+        <CollapsibleSection title="Projects">
+          {PROJECTS.map((item) => (
+            <ProjectCard 
+              key={item.id} 
+              title={item.name}
+              date={item.tags.join(" • ")}
+              description={item.description}
+              link={item.url}
+            />
+          ))}
+        </CollapsibleSection>
       </div>
     </main>
   );
