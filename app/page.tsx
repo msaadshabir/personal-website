@@ -30,8 +30,8 @@ export default function Home(): React.JSX.Element {
               aria-label="Visit LinkedIn profile"
               className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              <span aria-hidden="true" className="text-current">↗ </span>
               LinkedIn
+              <span aria-hidden="true" className="text-current ml-0.5">↗</span>
             </a>
             <a 
               href={SITE_CONFIG.github} 
@@ -40,8 +40,8 @@ export default function Home(): React.JSX.Element {
               aria-label="Visit GitHub profile"
               className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              <span aria-hidden="true" className="text-current">↗ </span>
               GitHub
+              <span aria-hidden="true" className="text-current ml-0.5">↗</span>
             </a>
             <a 
               href={SITE_CONFIG.resume} 
@@ -50,8 +50,8 @@ export default function Home(): React.JSX.Element {
               aria-label="Download resume PDF"
               className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              <span aria-hidden="true" className="text-current">↗ </span>
               Resume
+              <span aria-hidden="true" className="text-current ml-0.5">↗</span>
             </a>
           </div>
         </section>
