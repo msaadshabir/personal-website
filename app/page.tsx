@@ -1,8 +1,6 @@
-import ExperienceCard from "@/components/ExperienceCard";
-import ProjectCard from "@/components/ProjectCard";
+import Link from "next/link";
 import EmailButton from "@/components/EmailButton";
-import CollapsibleSection from "@/components/CollapsibleSection";
-import { EXPERIENCE, PROJECTS, SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export default function Home(): React.JSX.Element {
   return (
@@ -31,6 +29,13 @@ export default function Home(): React.JSX.Element {
             </p>
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link 
+              href="/work"
+              className="font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Work & Projects
+              <span aria-hidden="true" className="text-current ml-0.5">↗</span>
+            </Link>
             <EmailButton />
             <a 
               href={SITE_CONFIG.linkedin} 
@@ -64,24 +69,6 @@ export default function Home(): React.JSX.Element {
             </a>
           </div>
         </section>
-
-        <CollapsibleSection title="Work">
-          {EXPERIENCE.map((item) => (
-            <ExperienceCard key={`${item.company}-${item.position}`} {...item} />
-          ))}
-        </CollapsibleSection>
-
-        <CollapsibleSection title="Projects">
-          {PROJECTS.map((item) => (
-            <ProjectCard 
-              key={item.id} 
-              title={item.name}
-              date={item.tags.join(" • ")}
-              description={item.description}
-              link={item.url}
-            />
-          ))}
-        </CollapsibleSection>
       </div>
     </main>
   );
