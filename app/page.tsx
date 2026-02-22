@@ -15,7 +15,7 @@ export default function Home(): React.JSX.Element {
               Focusing on network architecture, protocol analysis, and system programming.
             </p>
             <p className="text-lg leading-relaxed">
-              Studying Bachelor of Information Technology - Network Technology (NET) at <span className="font-semibold text-foreground">Carleton University</span>.
+              Studying Network Technology at <span className="font-semibold text-foreground">Carleton University</span>.
             </p>
             <p className="text-lg leading-relaxed">
               Currently exploring new experiences.
