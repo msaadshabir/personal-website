@@ -9,7 +9,16 @@ export default function Home(): React.JSX.Element {
     <main className="flex w-full min-h-screen flex-col items-center font-sans px-8 bg-background text-foreground">
       <div className="z-50 flex w-full flex-col items-start gap-8 px-4 pt-32 pb-48 text-base md:w-3/4 lg:w-1/2">
         <section className="flex flex-col gap-8">
-          <h2 className="font-semibold tracking-[-0.02em] text-foreground">Hi, I&apos;m Muhammad Saad Shabir.</h2>
+          <div className="flex flex-col gap-2">
+            <h2 className="font-semibold tracking-[-0.02em] text-foreground">Hi, I&apos;m Muhammad Saad Shabir.</h2>
+            <div className="flex items-center gap-2 text-muted-foreground ml-1">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+              </span>
+              <span>Ottawa, Canada</span>
+            </div>
+          </div>
           <div className="space-y-4">
             <p className="text-lg leading-relaxed">
               Focusing on network architecture, protocol analysis, and system programming.
