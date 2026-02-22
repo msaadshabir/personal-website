@@ -15,7 +15,7 @@ export default function Home(): React.JSX.Element {
               Focusing on network architecture, protocol analysis, and system programming.
             </p>
             <p className="text-lg leading-relaxed">
-              Studying BIT NET at <span className="font-semibold text-foreground">Carleton University</span>.
+              Studying Bachelor of Information Technology - Network Technology (NET) at <span className="font-semibold text-foreground">Carleton University</span>.
             </p>
             <p className="text-lg leading-relaxed">
               Currently exploring new experiences.
@@ -30,6 +30,7 @@ export default function Home(): React.JSX.Element {
               aria-label="Visit LinkedIn profile"
               className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
+              <span aria-hidden="true" className="text-current">↗ </span>
               LinkedIn
             </a>
             <a 
@@ -39,6 +40,7 @@ export default function Home(): React.JSX.Element {
               aria-label="Visit GitHub profile"
               className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
+              <span aria-hidden="true" className="text-current">↗ </span>
               GitHub
             </a>
             <a 
@@ -48,6 +50,7 @@ export default function Home(): React.JSX.Element {
               aria-label="Download resume PDF"
               className="font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
+              <span aria-hidden="true" className="text-current">↗ </span>
               Resume
             </a>
           </div>

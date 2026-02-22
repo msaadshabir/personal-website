@@ -17,7 +17,10 @@ export default function EmailButton() {
       onClick={handleEmailClick} 
       className="relative font-medium text-muted-foreground hover:text-foreground transition-colors"
     >
-      <span className={isCopied ? "invisible" : "visible"}>Email</span>
+      <span className={isCopied ? "invisible" : "visible"}>
+        <span aria-hidden="true" className="text-current">↗ </span>
+        Email
+      </span>
       <span className={`absolute left-0 top-0 ${isCopied ? "visible" : "invisible"}`}>Copied</span>
     </button>
   );
