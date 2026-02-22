@@ -29,13 +29,6 @@ export default function Home(): React.JSX.Element {
             </p>
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <Link 
-              href="/work"
-              className="font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Work & Projects
-              <span aria-hidden="true" className="text-current ml-0.5">↗</span>
-            </Link>
             <EmailButton />
             <a 
               href={SITE_CONFIG.linkedin} 
@@ -68,6 +61,24 @@ export default function Home(): React.JSX.Element {
               <span aria-hidden="true" className="text-current ml-0.5">↗</span>
             </a>
           </div>
+        </section>
+
+        <section className="flex flex-col gap-4 w-full">
+          <Link 
+            href="/work"
+            className="group flex items-center justify-between py-4 border-b border-border hover:border-foreground transition-colors"
+          >
+            <h3 className="text-xl font-medium text-foreground">Work</h3>
+            <span className="text-muted-foreground group-hover:text-foreground transition-colors">→</span>
+          </Link>
+          
+          <Link 
+            href="/projects"
+            className="group flex items-center justify-between py-4 border-b border-border hover:border-foreground transition-colors"
+          >
+            <h3 className="text-xl font-medium text-foreground">Projects</h3>
+            <span className="text-muted-foreground group-hover:text-foreground transition-colors">→</span>
+          </Link>
         </section>
       </div>
     </main>
