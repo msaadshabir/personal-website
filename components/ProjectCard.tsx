@@ -15,7 +15,7 @@ export default function ProjectCard({ title, date, description, link }: ProjectC
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="group w-fit flex items-center gap-1 font-bold text-muted-foreground hover:text-foreground transition-colors"
+          className="group w-fit flex items-center gap-1 font-bold text-foreground hover:opacity-75 transition-opacity"
         >
           <h3 className="text-current">{title}</h3>
           <span aria-hidden="true" className="text-current ml-0.5">↗</span>
