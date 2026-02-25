@@ -13,12 +13,16 @@ export default function EmailButton() {
     };
   }, []);
 
-  const handleEmailClick = () => {
-    navigator.clipboard.writeText(SITE_CONFIG.email);
-    setIsCopied(true);
-    
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setIsCopied(false), 2000);
+  const handleEmailClick = async () => {
+    try {
+      await navigator.clipboard.writeText(SITE_CONFIG.email);
+      setIsCopied(true);
+      
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => setIsCopied(false), 2000);
+    } catch {
+      // Clipboard API unavailable or permission denied
+    }
   };
 
   return (

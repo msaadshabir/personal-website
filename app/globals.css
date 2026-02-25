@@ -20,8 +20,6 @@
     font-size: clamp(15px, 0.45vw + 14px, 17px);
     line-height: 1.65;
     letter-spacing: -0.01em;
-    background: var(--background);
-    color: var(--foreground);
     @apply bg-background text-foreground;
   }
 

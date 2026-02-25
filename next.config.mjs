@@ -5,7 +5,9 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
   // Next.js 16 uses Turbopack by default
-  turbopack: {},
+  turbopack: {
+    root: process.cwd(),
+  },
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],
