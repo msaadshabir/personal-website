@@ -39,7 +39,7 @@ interface SectionProps {
 function MobileSectionHeader({ title }: Pick<SectionProps, "title">): React.JSX.Element {
   return (
     <div className="sticky top-0 z-20 -mx-6 mb-4 border-b border-[color:var(--surface-border)] bg-[color:var(--header-surface)] px-6 py-4 backdrop-blur md:-mx-12 md:px-12 lg:hidden">
-      <h2 className="text-[0.8rem] font-semibold uppercase tracking-[0.18em] text-foreground">{title}</h2>
+      <div className="text-[0.8rem] font-semibold uppercase tracking-[0.18em] text-foreground">{title}</div>
     </div>
   );
 }
@@ -47,6 +47,7 @@ function MobileSectionHeader({ title }: Pick<SectionProps, "title">): React.JSX.
 function ContentSection({ id, title, className, children }: SectionProps): React.JSX.Element {
   return (
     <section id={id} className={className}>
+      <h2 className="sr-only">{title}</h2>
       <MobileSectionHeader title={title} />
       {children}
     </section>
