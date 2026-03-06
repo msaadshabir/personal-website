@@ -1,24 +1,22 @@
 "use client";
 
-import { useState } from "react";
-
 interface CollapsibleSectionProps {
   title: string;
   children: React.ReactNode;
-  defaultOpen?: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
 export default function CollapsibleSection({
   title,
   children,
-  defaultOpen = false,
+  isOpen,
+  onToggle,
 }: CollapsibleSectionProps) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-
   return (
     <section className="flex w-full flex-col gap-8">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle}
         className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-muted-foreground transition-colors w-fit min-h-[44px]"
         aria-expanded={isOpen}
         aria-label={`${isOpen ? "Collapse" : "Expand"} ${title} section`}

@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 import ExperienceCard from "@/components/ExperienceCard";
 import ProjectCard from "@/components/ProjectCard";
 import EmailButton from "@/components/EmailButton";
@@ -5,6 +9,8 @@ import CollapsibleSection from "@/components/CollapsibleSection";
 import { EXPERIENCE, PROJECTS, SITE_CONFIG, WRITING } from "@/lib/constants";
 
 export default function Home(): React.JSX.Element {
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
   const socialLinks = [
     {
       label: "LinkedIn",
@@ -66,13 +72,21 @@ export default function Home(): React.JSX.Element {
           </div>
         </section>
 
-        <CollapsibleSection title="Work">
+        <CollapsibleSection
+          title="Work"
+          isOpen={openSection === "work"}
+          onToggle={() => setOpenSection((current) => (current === "work" ? null : "work"))}
+        >
           {EXPERIENCE.map((item) => (
             <ExperienceCard key={`${item.company}-${item.position}`} {...item} />
           ))}
         </CollapsibleSection>
 
-        <CollapsibleSection title="Projects">
+        <CollapsibleSection
+          title="Projects"
+          isOpen={openSection === "projects"}
+          onToggle={() => setOpenSection((current) => (current === "projects" ? null : "projects"))}
+        >
           {PROJECTS.map((item) => (
             <ProjectCard 
               key={item.id} 
@@ -84,7 +98,11 @@ export default function Home(): React.JSX.Element {
           ))}
         </CollapsibleSection>
 
-        <CollapsibleSection title="Writing">
+        <CollapsibleSection
+          title="Writing"
+          isOpen={openSection === "writing"}
+          onToggle={() => setOpenSection((current) => (current === "writing" ? null : "writing"))}
+        >
           {WRITING.length > 0 ? (
             WRITING.map((item) => (
               <ProjectCard
