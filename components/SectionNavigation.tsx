@@ -93,34 +93,8 @@ export default function SectionNavigation({ items }: SectionNavigationProps): Re
   }, [items]);
 
   return (
-    <>
-      <nav className="mt-6 lg:hidden" aria-label="Section navigation">
-        <ul className="-mx-1 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {items.map((item) => (
-            <li key={item.label} className="snap-start">
-              <a
-                href={item.href}
-                className={`inline-flex min-h-10 items-center rounded-full border px-3.5 py-2 text-sm font-medium transition-colors ${
-                  activeSection === item.id
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-[color:var(--surface-border)] bg-[color:var(--surface-soft)] text-muted-foreground"
-                }`}
-                aria-current={activeSection === item.id ? "page" : undefined}
-                onClick={() => {
-                  hasActivatedNavRef.current = true;
-                  isScrollingToRef.current = true;
-                  setActiveSection(item.id);
-                }}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      <nav className="hidden lg:block" aria-label="Section navigation">
-        <ul className="mt-16 w-max space-y-1">
+    <nav className="hidden lg:block">
+      <ul className="mt-16 w-max space-y-1">
         {items.map((item) => (
           <li key={item.label}>
             <a
@@ -152,8 +126,7 @@ export default function SectionNavigation({ items }: SectionNavigationProps): Re
             </a>
           </li>
         ))}
-        </ul>
-      </nav>
-    </>
+      </ul>
+    </nav>
   );
 }
