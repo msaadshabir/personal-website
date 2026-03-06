@@ -38,7 +38,7 @@ interface SectionProps {
 
 function MobileSectionHeader({ title }: Pick<SectionProps, "title">): React.JSX.Element {
   return (
-    <div className="sticky top-0 z-20 -mx-6 mb-4 border-b border-[color:var(--surface-border)] bg-[color:var(--header-surface)] px-6 py-4 backdrop-blur md:-mx-12 md:px-12 lg:hidden">
+    <div className="sticky top-0 z-20 -mx-4 mb-4 border-b border-[color:var(--surface-border)] bg-[color:var(--header-surface)] px-4 py-3 backdrop-blur md:-mx-12 md:px-12 md:py-4 lg:hidden">
       <h2 className="text-[0.8rem] font-semibold uppercase tracking-[0.18em] text-foreground">{title}</h2>
     </div>
   );
@@ -56,15 +56,15 @@ function ContentSection({ id, title, className, children }: SectionProps): React
 export default function Home(): React.JSX.Element {
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0">
+    <main className="mx-auto min-h-screen w-full max-w-screen-xl px-4 py-8 md:px-12 md:py-20 lg:px-24 lg:py-0">
       <div className="lg:flex lg:justify-between lg:gap-12">
         <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
           <div>
             <div>
-              <h1 className="block tracking-tight text-4xl font-bold text-foreground sm:text-5xl">
+              <h1 className="block max-w-[12ch] tracking-tight text-3xl font-bold text-foreground sm:text-5xl">
                 {SITE_CONFIG.name}
               </h1>
-              <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+              <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground md:mt-4">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[color:var(--status-soft)] opacity-75"></span>
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[color:var(--status)]"></span>
@@ -76,7 +76,7 @@ export default function Home(): React.JSX.Element {
             <SectionNavigation items={sectionItems} />
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 lg:mt-0">
+          <div className="mt-6 flex flex-wrap items-center gap-2.5 md:mt-8 md:gap-x-5 md:gap-y-3 lg:mt-0">
             <EmailButton />
             {socialLinks.map((link) => (
               <a
@@ -85,7 +85,7 @@ export default function Home(): React.JSX.Element {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.ariaLabel}
-                className="font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex min-h-11 items-center rounded-full border border-[color:var(--surface-border)] px-3.5 py-2 font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
                 <span aria-hidden="true" className="ml-0.5 text-current">↗</span>
@@ -94,7 +94,7 @@ export default function Home(): React.JSX.Element {
           </div>
         </header>
 
-        <div id="content" className="pt-20 lg:w-[52%] lg:py-24">
+        <div id="content" className="pt-12 md:pt-16 lg:w-[52%] lg:py-24">
           <ContentSection id="about" title="About" className="mb-16 scroll-mt-24 md:mb-24 lg:mb-36 lg:scroll-mt-24">
             <div className="space-y-4">
               <p>

@@ -31,7 +31,7 @@ export default function EmailButton(): React.JSX.Element {
     <button
       type="button"
       onClick={handleEmailClick}
-      className="relative font-medium text-muted-foreground hover:text-foreground transition-colors"
+      className="relative inline-flex min-h-11 items-center rounded-full border border-[color:var(--surface-border)] px-3.5 py-2 font-medium text-muted-foreground transition-colors hover:text-foreground"
     >
       <span className={isCopied ? "invisible" : "visible"}>
         Email

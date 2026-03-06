@@ -48,6 +48,7 @@
     font-size: clamp(15.5px, 0.2vw + 15px, 16.5px);
     line-height: 1.6;
     letter-spacing: -0.01em;
+    overflow-x: hidden;
     @apply bg-background text-foreground;
   }
 
@@ -71,5 +72,11 @@
 
   p {
     max-width: 68ch;
+    text-wrap: pretty;
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
   }
 }
