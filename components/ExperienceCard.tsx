@@ -6,7 +6,7 @@ interface ExperienceCardProps {
   link: string;
 }
 
-const cardStyles = "group relative grid gap-4 transition-all sm:grid-cols-4";
+const cardStyles = "relative grid gap-4 transition-all sm:grid-cols-4";
 
 export default function ExperienceCard({ position, company, dates, description, link }: ExperienceCardProps) {
   const content = (
@@ -17,7 +17,7 @@ export default function ExperienceCard({ position, company, dates, description, 
         </p>
       </div>
       <div className="sm:col-span-3">
-        <h3 className="font-medium text-foreground transition-colors group-hover:text-muted-foreground">
+        <h3 className="font-medium text-foreground">
           {company} · {position}
         </h3>
         <ul className="mt-2 flex list-disc flex-col gap-2 pl-4 text-sm leading-normal text-foreground">
