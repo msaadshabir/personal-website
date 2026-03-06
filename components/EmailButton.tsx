@@ -3,9 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import { SITE_CONFIG } from "@/lib/constants";
 
-export default function EmailButton() {
+const COPY_RESET_DELAY_MS = 2000;
+
+export default function EmailButton(): React.JSX.Element {
   const [isCopied, setIsCopied] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     return () => {
@@ -17,17 +19,18 @@ export default function EmailButton() {
     try {
       await navigator.clipboard.writeText(SITE_CONFIG.email);
       setIsCopied(true);
-      
+
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(() => setIsCopied(false), 2000);
+      timeoutRef.current = setTimeout(() => setIsCopied(false), COPY_RESET_DELAY_MS);
     } catch {
       // Clipboard API unavailable or permission denied
     }
   };
 
   return (
-    <button 
-      onClick={handleEmailClick} 
+    <button
+      type="button"
+      onClick={handleEmailClick}
       className="relative font-medium text-muted-foreground hover:text-foreground transition-colors"
     >
       <span className={isCopied ? "invisible" : "visible"}>

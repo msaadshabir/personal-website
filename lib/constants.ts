@@ -1,13 +1,44 @@
 export const SITE_CONFIG = {
   name: "Muhammad Saad Shabir",
+  url: "https://msaadshabir.vercel.app",
   email: "saad.shabir@hotmail.com",
   github: "https://github.com/msaadshabir",
   linkedin: "https://www.linkedin.com/in/msaadshabir/",
   resume: "/MuhammadSaad_Shabir_Resume.pdf",
+  location: "Ottawa, Canada",
+  description: "Focusing on network architecture, protocol analysis, and system programming.",
+  jobTitle: "Network Technician & Software Developer",
+  school: "Carleton University",
+  status: "Currently exploring new experiences.",
+  twitterHandle: "@msaadshabir",
 } as const;
 
+type Project = {
+  id: string;
+  name: string;
+  url: string;
+  description: string;
+  tags: readonly string[];
+};
+
+type WritingEntry = {
+  id: string;
+  title: string;
+  publishedAt: string;
+  description: string;
+  url: string;
+};
+
+type Experience = {
+  position: string;
+  company: string;
+  dates: string;
+  description: readonly string[];
+  link: string;
+};
+
 // Projects data
-export const PROJECTS = [
+export const PROJECTS: readonly Project[] = [
   {
     id: "001",
     name: "ZTAP",
@@ -59,8 +90,10 @@ export const PROJECTS = [
   },
 ] as const;
 
+export const WRITING: readonly WritingEntry[] = [];
+
 // Experience data
-export const EXPERIENCE = [
+export const EXPERIENCE: readonly Experience[] = [
   {
     position: "Network Technician",
     company: "AriesTECH",

@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SITE_CONFIG } from "@/lib/constants";
 import "./globals.css";
 
 const inter = Inter({
@@ -12,12 +13,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Muhammad Saad Shabir",
-  description: "Focusing on network architecture, protocol analysis, and system programming. Network engineering and system programming projects.",
+  metadataBase: new URL(SITE_CONFIG.url),
+  title: SITE_CONFIG.name,
+  description: `${SITE_CONFIG.description} Network engineering and system programming projects.`,
   keywords: ["network engineering", "system programming", "cybersecurity", "cloud architecture", "software development"],
-  authors: [{ name: "Muhammad Saad Shabir" }],
-  creator: "Muhammad Saad Shabir",
-  publisher: "Muhammad Saad Shabir",
+  authors: [{ name: SITE_CONFIG.name }],
+  creator: SITE_CONFIG.name,
+  publisher: SITE_CONFIG.name,
   formatDetection: {
     email: false,
     address: false,
@@ -36,33 +38,33 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Muhammad Saad Shabir",
-    description: "Focusing on network architecture, protocol analysis, and system programming. Network engineering and system programming projects.",
-    url: "https://msaadshabir.vercel.app/",
-    siteName: "Muhammad Saad Shabir",
+    title: SITE_CONFIG.name,
+    description: `${SITE_CONFIG.description} Network engineering and system programming projects.`,
+    url: SITE_CONFIG.url,
+    siteName: SITE_CONFIG.name,
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Muhammad Saad Shabir",
-    description: "Focusing on network architecture, protocol analysis, and system programming.",
-    creator: "@msaadshabir",
+    title: SITE_CONFIG.name,
+    description: SITE_CONFIG.description,
+    creator: SITE_CONFIG.twitterHandle,
   },
   alternates: {
-    canonical: "https://msaadshabir.vercel.app/",
+    canonical: SITE_CONFIG.url,
   },
   other: {
     "script:ld+json": JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "Muhammad Saad Shabir",
-      "jobTitle": "Network Technician & Software Developer",
-      "description": "Focusing on network architecture, protocol analysis, and system programming",
-      "url": "https://msaadshabir.vercel.app/",
+      "name": SITE_CONFIG.name,
+      "jobTitle": SITE_CONFIG.jobTitle,
+      "description": SITE_CONFIG.description,
+      "url": SITE_CONFIG.url,
       "sameAs": [
-        "https://github.com/msaadshabir",
-        "https://www.linkedin.com/in/msaadshabir/"
+        SITE_CONFIG.github,
+        SITE_CONFIG.linkedin
       ],
       "knowsAbout": [
         "Network Architecture",
@@ -75,7 +77,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -92,7 +94,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="antialiased min-h-screen font-sans leading-relaxed">
+      <body className="min-h-screen font-sans leading-relaxed antialiased">
         {children}
         <SpeedInsights />
         <Analytics />
