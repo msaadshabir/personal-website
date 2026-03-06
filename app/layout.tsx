@@ -45,12 +45,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: SITE_CONFIG.name,
-    description: SITE_CONFIG.description,
-    creator: SITE_CONFIG.twitterHandle,
-  },
+  // Removed Twitter/X metadata to avoid platform-specific tags
   alternates: {
     canonical: SITE_CONFIG.url,
   },

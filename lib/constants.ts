@@ -10,7 +10,6 @@ export const SITE_CONFIG = {
   jobTitle: "Network Technician & Software Developer",
   school: "Carleton University",
   status: "Currently exploring new experiences.",
-  twitterHandle: "@msaadshabir",
 } as const;
 
 type Project = {
