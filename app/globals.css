@@ -9,8 +9,8 @@
     --surface-soft: rgba(36, 31, 24, 0.055);
     --surface-border: rgba(36, 31, 24, 0.08);
     --header-surface: rgba(246, 239, 228, 0.92);
-    --status: #4f8a73;
-    --status-soft: rgba(79, 138, 115, 0.32);
+    --status: #22c55e;
+    --status-soft: rgba(34, 197, 94, 0.32);
   }
 
   :root[data-theme="cool-slate"] {
@@ -20,8 +20,6 @@
     --surface-soft: rgba(29, 37, 43, 0.055);
     --surface-border: rgba(29, 37, 43, 0.08);
     --header-surface: rgba(237, 243, 244, 0.92);
-    --status: #3f8b87;
-    --status-soft: rgba(63, 139, 135, 0.28);
   }
 
   :root[data-theme="stone-editorial"] {
@@ -31,8 +29,6 @@
     --surface-soft: rgba(31, 29, 26, 0.06);
     --surface-border: rgba(31, 29, 26, 0.1);
     --header-surface: rgba(235, 231, 223, 0.94);
-    --status: #567861;
-    --status-soft: rgba(86, 120, 97, 0.28);
   }
 
   html {
