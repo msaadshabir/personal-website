@@ -1,60 +1,82 @@
-"use client";
-
-import { useState } from "react";
-
 import ExperienceCard from "@/components/ExperienceCard";
 import ProjectCard from "@/components/ProjectCard";
 import EmailButton from "@/components/EmailButton";
-import CollapsibleSection from "@/components/CollapsibleSection";
+import SectionNavigation from "@/components/SectionNavigation";
 import { EXPERIENCE, PROJECTS, SITE_CONFIG, WRITING } from "@/lib/constants";
 
-export default function Home(): React.JSX.Element {
-  const [openSection, setOpenSection] = useState<string | null>(null);
+const sectionItems = [
+  { label: "About", href: "#about", id: "about" },
+  { label: "Experience", href: "#experience", id: "experience" },
+  { label: "Projects", href: "#projects", id: "projects" },
+  { label: "Writing", href: "#writing", id: "writing" },
+] as const;
 
-  const socialLinks = [
-    {
-      label: "LinkedIn",
-      href: SITE_CONFIG.linkedin,
-      ariaLabel: "Visit LinkedIn profile",
-    },
-    {
-      label: "GitHub",
-      href: SITE_CONFIG.github,
-      ariaLabel: "Visit GitHub profile",
-    },
-    {
-      label: "Resume",
-      href: SITE_CONFIG.resume,
-      ariaLabel: "Download resume PDF",
-    },
-  ] as const;
+const socialLinks = [
+  {
+    label: "LinkedIn",
+    href: SITE_CONFIG.linkedin,
+    ariaLabel: "Visit LinkedIn profile",
+  },
+  {
+    label: "GitHub",
+    href: SITE_CONFIG.github,
+    ariaLabel: "Visit GitHub profile",
+  },
+  {
+    label: "Resume",
+    href: SITE_CONFIG.resume,
+    ariaLabel: "Download resume PDF",
+  },
+] as const;
+
+interface SectionProps {
+  id: string;
+  title: string;
+  className: string;
+  children: React.ReactNode;
+}
+
+function MobileSectionHeader({ title }: Pick<SectionProps, "title">): React.JSX.Element {
+  return (
+    <div className="sticky top-0 z-20 -mx-6 mb-4 border-b border-[color:var(--surface-border)] bg-[color:var(--header-surface)] px-6 py-4 backdrop-blur md:-mx-12 md:px-12 lg:hidden">
+      <h2 className="text-[0.8rem] font-semibold uppercase tracking-[0.18em] text-foreground">{title}</h2>
+    </div>
+  );
+}
+
+function ContentSection({ id, title, className, children }: SectionProps): React.JSX.Element {
+  return (
+    <section id={id} className={className}>
+      <MobileSectionHeader title={title} />
+      {children}
+    </section>
+  );
+}
+
+export default function Home(): React.JSX.Element {
 
   return (
-    <main className="flex w-full min-h-screen flex-col items-center px-8">
-      <div className="flex w-full flex-col items-start gap-8 px-4 pt-32 pb-48 text-base md:w-3/4 lg:w-1/2">
-        <section className="flex flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <h2 className="font-semibold tracking-[-0.02em] text-foreground">Hi, I&apos;m {SITE_CONFIG.name}</h2>
-            <div className="flex items-center gap-2 text-muted-foreground ml-1">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-              </span>
-              <span>{SITE_CONFIG.location}</span>
+    <main className="mx-auto min-h-screen w-full max-w-screen-xl px-6 py-12 md:px-12 md:py-20 lg:px-24 lg:py-0">
+      <div className="lg:flex lg:justify-between lg:gap-12">
+        <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
+          <div>
+            <div>
+              <h1 className="block tracking-tight text-4xl font-bold text-foreground sm:text-5xl">
+                {SITE_CONFIG.name}
+              </h1>
+              <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[color:var(--status-soft)] opacity-75"></span>
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[color:var(--status)]"></span>
+                </span>
+                <span>{SITE_CONFIG.location}</span>
+              </div>
             </div>
+
+            <SectionNavigation items={sectionItems} />
           </div>
-          <div className="space-y-4">
-            <p className="text-lg leading-relaxed">
-              {SITE_CONFIG.description}
-            </p>
-            <p className="text-lg leading-relaxed">
-              Studying Network Technology at <span className="font-semibold text-foreground">{SITE_CONFIG.school}</span>.
-            </p>
-            <p className="text-lg leading-relaxed">
-              {SITE_CONFIG.status}
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
+
+          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 lg:mt-0">
             <EmailButton />
             {socialLinks.map((link) => (
               <a
@@ -70,57 +92,80 @@ export default function Home(): React.JSX.Element {
               </a>
             ))}
           </div>
-        </section>
+        </header>
 
-        <CollapsibleSection
-          title="Work"
-          isOpen={openSection === "work"}
-          onToggle={() => setOpenSection((current) => (current === "work" ? null : "work"))}
-        >
-          {EXPERIENCE.map((item) => (
-            <ExperienceCard key={`${item.company}-${item.position}`} {...item} />
-          ))}
-        </CollapsibleSection>
-
-        <CollapsibleSection
-          title="Projects"
-          isOpen={openSection === "projects"}
-          onToggle={() => setOpenSection((current) => (current === "projects" ? null : "projects"))}
-        >
-          {PROJECTS.map((item) => (
-            <ProjectCard 
-              key={item.id} 
-              title={item.name}
-              date={item.tags.join(" • ")}
-              description={item.description}
-              link={item.url}
-            />
-          ))}
-        </CollapsibleSection>
-
-        <CollapsibleSection
-          title="Writing"
-          isOpen={openSection === "writing"}
-          onToggle={() => setOpenSection((current) => (current === "writing" ? null : "writing"))}
-        >
-          {WRITING.length > 0 ? (
-            WRITING.map((item) => (
-              <ProjectCard
-                key={item.id}
-                title={item.title}
-                date={item.publishedAt}
-                description={item.description}
-                link={item.url}
-              />
-            ))
-          ) : (
-            <div className="rounded-lg p-4">
-              <p className="font-medium text-muted-foreground">
-                Essays, technical notes, and lab write-ups will appear here soon.
+        <div id="content" className="pt-20 lg:w-[52%] lg:py-24">
+          <ContentSection id="about" title="About" className="mb-16 scroll-mt-24 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+            <div className="space-y-4">
+              <p>
+                I&apos;m studying Network Technology at{" "}
+                <a
+                  href={SITE_CONFIG.schoolUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-medium text-foreground transition-colors hover:text-muted-foreground"
+                >
+                  <span>{SITE_CONFIG.school}</span>
+                  <span aria-hidden="true" className="text-current">↗</span>
+                </a>
+                , where I&apos;m building a foundation in systems, infrastructure, and practical software engineering.
               </p>
+              <p>
+                My current focus is network architecture, protocol analysis, and low-level software, with an interest in building tools that are reliable, observable, and fast.
+              </p>
+              <p>{SITE_CONFIG.status}</p>
             </div>
-          )}
-        </CollapsibleSection>
+          </ContentSection>
+
+          <ContentSection
+            id="experience"
+            title="Experience"
+            className="mb-16 scroll-mt-24 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+          >
+            <div className="flex flex-col gap-12">
+              {EXPERIENCE.map((item) => (
+                <ExperienceCard key={`${item.company}-${item.position}`} {...item} />
+              ))}
+            </div>
+          </ContentSection>
+
+          <ContentSection id="projects" title="Projects" className="mb-16 scroll-mt-24 lg:scroll-mt-24">
+            <div className="flex flex-col gap-12">
+              {PROJECTS.map((item) => (
+                <ProjectCard
+                  key={item.id}
+                  title={item.name}
+                  description={item.description}
+                  link={item.url}
+                  tags={item.tags}
+                />
+              ))}
+            </div>
+          </ContentSection>
+
+          <ContentSection id="writing" title="Writing" className="mt-16 scroll-mt-24 md:mt-24 lg:mt-36 lg:scroll-mt-24">
+            {WRITING.length > 0 ? (
+              <div className="flex flex-col gap-12">
+                {WRITING.map((item) => (
+                  <ProjectCard
+                    key={item.id}
+                    title={item.title}
+                    date={item.publishedAt}
+                    description={item.description}
+                    link={item.url}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-4">
+                <div className="sm:col-span-1"></div>
+                <p className="sm:col-span-3 text-sm leading-normal text-muted-foreground">
+                  Technical notes and write-ups coming soon.
+                </p>
+              </div>
+            )}
+          </ContentSection>
+        </div>
       </div>
     </main>
   );

@@ -7,8 +7,8 @@ export const SITE_CONFIG = {
   resume: "/MuhammadSaad_Shabir_Resume.pdf",
   location: "Ottawa, Canada",
   description: "Focusing on network architecture, protocol analysis, and system programming.",
-  jobTitle: "Network Technician & Software Developer",
   school: "Carleton University",
+  schoolUrl: "https://carleton.ca/",
   status: "Currently exploring new experiences.",
 } as const;
 
@@ -96,9 +96,11 @@ export const EXPERIENCE: readonly Experience[] = [
   {
     position: "Network Technician",
     company: "AriesTECH",
-    dates: "January 2024 - April 2025",
+    dates: "Jan 2024\n-\nApr 2025",
     description: [
-      "Maintained 99% uptime for Cisco infrastructure through advanced routing and monitoring, while implementing Python automation to reduce manual configuration time by 30%.",
+      "Installed, configured, and maintained Cisco routers and switches; designed Layer 2 and Layer 3 segmentation with VLANs, trunking, and inter-VLAN routing, and implemented static, RIP, and OSPF routing to optimize traffic flow and improve security across the LAN/WAN.",
+      "Maintained 99.9% network uptime through proactive monitoring, rapid diagnostics with Wireshark and Cisco IOS tools, and regular preventative maintenance including firmware upgrades, ACL reviews, and configuration backups.",
+      "Automated routine network configuration tasks and documentation updates using Python scripts, reducing manual configuration time by 30% and minimizing human error during deployment windows.",
     ],
     link: "#",
   },

@@ -3,22 +3,50 @@
 
 @layer base {
   :root {
-    --background: oklch(0.9736 0.0017 67.8);
-    --foreground: #1d1d1f;
-    --muted-foreground: #86868b;
+    --background: #f6efe4;
+    --foreground: #241f18;
+    --muted-foreground: #74695d;
+    --surface-soft: rgba(36, 31, 24, 0.055);
+    --surface-border: rgba(36, 31, 24, 0.08);
+    --header-surface: rgba(246, 239, 228, 0.92);
+    --status: #4f8a73;
+    --status-soft: rgba(79, 138, 115, 0.32);
+  }
+
+  :root[data-theme="cool-slate"] {
+    --background: #edf3f4;
+    --foreground: #1d252b;
+    --muted-foreground: #62707a;
+    --surface-soft: rgba(29, 37, 43, 0.055);
+    --surface-border: rgba(29, 37, 43, 0.08);
+    --header-surface: rgba(237, 243, 244, 0.92);
+    --status: #3f8b87;
+    --status-soft: rgba(63, 139, 135, 0.28);
+  }
+
+  :root[data-theme="stone-editorial"] {
+    --background: #ebe7df;
+    --foreground: #1f1d1a;
+    --muted-foreground: #66615a;
+    --surface-soft: rgba(31, 29, 26, 0.06);
+    --surface-border: rgba(31, 29, 26, 0.1);
+    --header-surface: rgba(235, 231, 223, 0.94);
+    --status: #567861;
+    --status-soft: rgba(86, 120, 97, 0.28);
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    color-scheme: light;
   }
 
   body {
     font-feature-settings: "cv01", "cv05", "zero", "tnum";
     font-variant-numeric: tabular-nums;
-    font-size: clamp(15px, 0.45vw + 14px, 17px);
-    line-height: 1.65;
+    font-size: clamp(15.5px, 0.2vw + 15px, 16.5px);
+    line-height: 1.6;
     letter-spacing: -0.01em;
     @apply bg-background text-foreground;
   }
@@ -28,21 +56,17 @@
   }
 
   h1 {
-    font-weight: 700;
-    line-height: 1.15;
-    font-size: clamp(32px, 2vw + 24px, 44px);
+    line-height: 1.08;
   }
 
   h2 {
-    font-weight: 700;
-    line-height: 1.2;
-    font-size: clamp(26px, 1.2vw + 20px, 32px);
+    font-size: 0.84rem;
+    line-height: 1.1;
   }
 
   h3 {
-    font-weight: 600;
-    line-height: 1.25;
-    font-size: clamp(20px, 0.6vw + 18px, 24px);
+    font-size: clamp(1rem, 0.2vw + 0.96rem, 1.08rem);
+    line-height: 1.35;
   }
 
   p {

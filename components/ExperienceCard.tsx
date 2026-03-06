@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 interface ExperienceCardProps {
   position: string;
   company: string;
@@ -8,26 +6,34 @@ interface ExperienceCardProps {
   link: string;
 }
 
-const cardStyles = "relative w-full rounded-lg p-4";
+const cardStyles = "group relative grid gap-4 transition-all sm:grid-cols-4";
 
 export default function ExperienceCard({ position, company, dates, description, link }: ExperienceCardProps) {
   const content = (
     <>
-      <div className="relative flex flex-col gap-2">
-        <h3 className="font-bold text-foreground">{position} @ {company}</h3>
-        <p className="font-medium text-muted-foreground">{dates}</p>
-        {description.map((item, index) => (
-          <p key={index} className="font-medium text-foreground">{item}</p>
-        ))}
+      <div className="sm:col-span-1">
+        <p className="mt-1 whitespace-pre-line text-xs font-semibold uppercase tracking-[0.12em] leading-relaxed text-muted-foreground">
+          {dates}
+        </p>
+      </div>
+      <div className="sm:col-span-3">
+        <h3 className="font-medium text-foreground transition-colors group-hover:text-muted-foreground">
+          {company} · {position}
+        </h3>
+        <ul className="mt-2 flex list-disc flex-col gap-2 pl-4 text-sm leading-normal text-foreground">
+          {description.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
       </div>
     </>
   );
 
   if (link && link !== "#") {
     return (
-      <Link href={link} className={cardStyles}>
+      <a href={link} className={cardStyles} target="_blank" rel="noopener noreferrer">
         {content}
-      </Link>
+      </a>
     );
   }
 

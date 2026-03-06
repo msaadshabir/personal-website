@@ -54,7 +54,6 @@ export const metadata: Metadata = {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": SITE_CONFIG.name,
-      "jobTitle": SITE_CONFIG.jobTitle,
       "description": SITE_CONFIG.description,
       "url": SITE_CONFIG.url,
       "sameAs": [
@@ -88,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} data-theme="stone-editorial">
       <body className="min-h-screen font-sans leading-relaxed antialiased">
         {children}
         <SpeedInsights />
