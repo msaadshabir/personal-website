@@ -102,7 +102,11 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          {children}
+          <main className="flex w-full min-h-screen flex-col items-center px-8">
+            <div className="flex w-full flex-col items-start gap-8 px-4 pt-32 pb-48 text-base md:w-3/4 lg:w-1/2">
+              {children}
+            </div>
+          </main>
           <SpeedInsights />
           <Analytics />
         </ThemeProvider>
