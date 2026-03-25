@@ -7,6 +7,7 @@ export const SITE_CONFIG = {
   resume: "/MuhammadSaad_Shabir_Resume.pdf",
   location: "Ottawa, Canada",
   description: "Focusing on network architecture, protocol analysis, and system programming.",
+  jobTitle: "Network Technician & Software Developer",
   school: "Carleton University",
   schoolUrl: "https://carleton.ca/",
   status: "Currently exploring new experiences.",

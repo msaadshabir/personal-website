@@ -45,7 +45,11 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-  // Removed Twitter/X metadata to avoid platform-specific tags
+  twitter: {
+    card: "summary",
+    title: SITE_CONFIG.name,
+    description: `${SITE_CONFIG.description} Network engineering and system programming projects.`,
+  },
   alternates: {
     canonical: SITE_CONFIG.url,
   },
@@ -54,6 +58,7 @@ export const metadata: Metadata = {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": SITE_CONFIG.name,
+      "jobTitle": SITE_CONFIG.jobTitle,
       "description": SITE_CONFIG.description,
       "url": SITE_CONFIG.url,
       "sameAs": [
