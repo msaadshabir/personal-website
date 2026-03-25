@@ -11,7 +11,7 @@ const cardStyles = "relative w-full rounded-lg p-4";
 export default function ExperienceCard({ position, company, dates, description, link }: ExperienceCardProps) {
   const content = (
     <div className="relative flex flex-col gap-2">
-      <h3 className="font-bold text-foreground">
+      <h3 className="text-foreground">
         {position} @ {company}
       </h3>
       <p className="font-medium text-muted-foreground">{dates}</p>
