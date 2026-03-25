@@ -27,21 +27,23 @@ export default function HomeClient(): React.JSX.Element {
   return (
     <main className="flex w-full min-h-screen flex-col items-center px-8">
       <div className="flex w-full flex-col items-start gap-8 px-4 pt-32 pb-48 text-base md:w-3/4 lg:w-1/2">
-        <section className="flex flex-col gap-8 w-full">
-          <div className="flex items-start justify-between w-full">
-            <div className="flex flex-col gap-2">
+        <section className="flex flex-col gap-8 w-full max-w-[68ch]">
+          <div className="flex flex-col gap-2 w-full">
+            <div className="flex items-end justify-between w-full">
               <h1 className="font-semibold tracking-[-0.04em] text-foreground">
                 Hi, I&apos;m {SITE_CONFIG.name}
               </h1>
-              <div className="flex items-center gap-2 text-muted-foreground ml-1 text-sm">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-                </span>
-                <span>{SITE_CONFIG.location}</span>
+              <div className="mb-[6px]">
+                <ThemeToggle />
               </div>
             </div>
-            <ThemeToggle />
+            <div className="flex items-center gap-2 text-muted-foreground ml-1 text-sm">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+              </span>
+              <span>{SITE_CONFIG.location}</span>
+            </div>
           </div>
 
           <div className="space-y-4">

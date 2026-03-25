@@ -39,10 +39,14 @@ export default function EmailButton(): React.JSX.Element {
       {isCopied ? (
         "Copied"
       ) : (
-        <>
-          <span className="inline group-hover:hidden">Email</span>
-          <span className="hidden group-hover:inline">Copy</span>
-        </>
+        <span className="grid" style={{ justifyItems: "start" }}>
+          <span className="col-start-1 row-start-1 opacity-100 group-hover:opacity-0 transition-opacity duration-0">
+            Email
+          </span>
+          <span className="col-start-1 row-start-1 opacity-0 group-hover:opacity-100 transition-opacity duration-0 pointer-events-none">
+            Copy
+          </span>
+        </span>
       )}
     </button>
   );
