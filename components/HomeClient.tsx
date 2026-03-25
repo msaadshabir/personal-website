@@ -51,15 +51,10 @@ export default function HomeClient(): React.JSX.Element {
                 href={SITE_CONFIG.schoolUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1 font-medium text-foreground transition-colors hover:text-foreground"
+                className="inline-flex items-center gap-1 font-medium text-foreground transition-colors hover:text-muted-foreground"
               >
-                <span className="underline decoration-surface-border underline-offset-4 transition-colors group-hover:decoration-foreground">
-                  {SITE_CONFIG.school}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                >
+                <span>{SITE_CONFIG.school}</span>
+                <span aria-hidden="true" className="text-current">
                   ↗
                 </span>
               </a>
@@ -83,15 +78,10 @@ export default function HomeClient(): React.JSX.Element {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.ariaLabel}
-                className="group flex items-center gap-1 font-medium text-foreground transition-colors hover:text-foreground"
+                className="font-medium text-foreground transition-colors hover:text-muted-foreground"
               >
-                <span className="underline decoration-surface-border underline-offset-4 transition-colors group-hover:decoration-foreground">
-                  {link.label}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                >
+                {link.label}
+                <span aria-hidden="true" className="ml-0.5 text-current">
                   ↗
                 </span>
               </a>
@@ -101,19 +91,19 @@ export default function HomeClient(): React.JSX.Element {
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             <Link
               href="/work"
-              className="font-medium text-foreground underline decoration-surface-border underline-offset-4 transition-colors hover:decoration-foreground"
+              className="font-medium text-foreground transition-colors hover:text-muted-foreground"
             >
               Work
             </Link>
             <Link
               href="/projects"
-              className="font-medium text-foreground underline decoration-surface-border underline-offset-4 transition-colors hover:decoration-foreground"
+              className="font-medium text-foreground transition-colors hover:text-muted-foreground"
             >
               Projects
             </Link>
             <Link
               href="/writing"
-              className="font-medium text-foreground underline decoration-surface-border underline-offset-4 transition-colors hover:decoration-foreground"
+              className="font-medium text-foreground transition-colors hover:text-muted-foreground"
             >
               Writing
             </Link>
