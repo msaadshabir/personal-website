@@ -6,27 +6,21 @@ interface ExperienceCardProps {
   link: string;
 }
 
-const cardStyles = "relative grid gap-4 transition-all sm:grid-cols-4";
+const cardStyles = "relative w-full rounded-lg p-4";
 
 export default function ExperienceCard({ position, company, dates, description, link }: ExperienceCardProps) {
   const content = (
-    <>
-      <div className="sm:col-span-1">
-        <p className="mt-1 whitespace-pre-line text-xs font-semibold uppercase tracking-[0.12em] leading-relaxed text-muted-foreground">
-          {dates}
+    <div className="relative flex flex-col gap-2">
+      <h3 className="font-bold text-foreground">
+        {position} @ {company}
+      </h3>
+      <p className="font-medium text-muted-foreground">{dates}</p>
+      {description.map((item, index) => (
+        <p key={index} className="font-medium text-foreground">
+          {item}
         </p>
-      </div>
-      <div className="sm:col-span-3">
-        <h3 className="font-medium text-foreground">
-          {company} · {position}
-        </h3>
-        <ul className="mt-2 flex list-disc flex-col gap-2 pl-4 text-sm leading-normal text-foreground">
-          {description.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      </div>
-    </>
+      ))}
+    </div>
   );
 
   if (link && link !== "#") {
