@@ -6,10 +6,10 @@ export default function WritingPage(): React.JSX.Element {
   return (
     <main className="flex w-full min-h-screen flex-col items-center px-8">
       <div className="flex w-full flex-col items-start gap-8 px-4 pt-32 pb-48 text-base md:w-3/4 lg:w-1/2">
-        <div className="mb-6">
+        <div className="mb-4">
           <Link
             href="/"
-            className="font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="font-medium text-foreground transition-colors hover:text-muted-foreground"
           >
             Home
           </Link>
