@@ -5,7 +5,12 @@ interface ProjectCardProps {
   link: string;
 }
 
-export default function ProjectCard({ title, date, description, link }: ProjectCardProps) {
+export default function ProjectCard({
+  title,
+  date,
+  description,
+  link,
+}: ProjectCardProps) {
   return (
     <div className="relative w-full rounded-lg p-4">
       <div className="relative flex flex-col gap-2">
@@ -20,7 +25,9 @@ export default function ProjectCard({ title, date, description, link }: ProjectC
             ↗
           </span>
         </a>
-        {date ? <p className="font-medium text-muted-foreground">{date}</p> : null}
+        {date ? (
+          <p className="font-medium text-muted-foreground">{date}</p>
+        ) : null}
         <p className="font-medium text-foreground">{description}</p>
       </div>
     </div>

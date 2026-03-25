@@ -15,7 +15,12 @@ type AccordionSectionProps = {
   children: React.ReactNode;
 };
 
-function AccordionSection({ title, isOpen, onToggle, children }: AccordionSectionProps): React.JSX.Element {
+function AccordionSection({
+  title,
+  isOpen,
+  onToggle,
+  children,
+}: AccordionSectionProps): React.JSX.Element {
   return (
     <section className="flex w-full flex-col gap-8">
       <button
@@ -42,7 +47,9 @@ function AccordionSection({ title, isOpen, onToggle, children }: AccordionSectio
         </svg>
       </button>
 
-      {isOpen ? <div className="flex w-full flex-col gap-2">{children}</div> : null}
+      {isOpen ? (
+        <div className="flex w-full flex-col gap-2">{children}</div>
+      ) : null}
     </section>
   );
 }
@@ -99,10 +106,13 @@ export default function HomeClient(): React.JSX.Element {
                   ↗
                 </span>
               </a>
-              , where I&apos;m building a foundation in systems, infrastructure, and practical software engineering.
+              , where I&apos;m building a foundation in systems, infrastructure,
+              and practical software engineering.
             </p>
             <p className="text-lg leading-relaxed">
-              My current focus is network architecture, protocol analysis, and low-level software, with an interest in building tools that are reliable, observable, and fast.
+              My current focus is network architecture, protocol analysis, and
+              low-level software, with an interest in building tools that are
+              reliable, observable, and fast.
             </p>
             <p className="text-lg leading-relaxed">{SITE_CONFIG.status}</p>
           </div>
@@ -130,17 +140,26 @@ export default function HomeClient(): React.JSX.Element {
         <AccordionSection
           title="Work"
           isOpen={openSection === "work"}
-          onToggle={() => setOpenSection((current) => (current === "work" ? null : "work"))}
+          onToggle={() =>
+            setOpenSection((current) => (current === "work" ? null : "work"))
+          }
         >
           {EXPERIENCE.map((item) => (
-            <ExperienceCard key={`${item.company}-${item.position}`} {...item} />
+            <ExperienceCard
+              key={`${item.company}-${item.position}`}
+              {...item}
+            />
           ))}
         </AccordionSection>
 
         <AccordionSection
           title="Projects"
           isOpen={openSection === "projects"}
-          onToggle={() => setOpenSection((current) => (current === "projects" ? null : "projects"))}
+          onToggle={() =>
+            setOpenSection((current) =>
+              current === "projects" ? null : "projects",
+            )
+          }
         >
           {PROJECTS.map((item) => (
             <ProjectCard
@@ -156,7 +175,11 @@ export default function HomeClient(): React.JSX.Element {
         <AccordionSection
           title="Writing"
           isOpen={openSection === "writing"}
-          onToggle={() => setOpenSection((current) => (current === "writing" ? null : "writing"))}
+          onToggle={() =>
+            setOpenSection((current) =>
+              current === "writing" ? null : "writing",
+            )
+          }
         >
           {WRITING.length > 0 ? (
             WRITING.map((item) => (
@@ -171,7 +194,8 @@ export default function HomeClient(): React.JSX.Element {
           ) : (
             <div className="rounded-lg p-4">
               <p className="font-medium text-muted-foreground">
-                Essays, technical notes, and lab write-ups will appear here soon.
+                Essays, technical notes, and lab write-ups will appear here
+                soon.
               </p>
             </div>
           )}

@@ -16,7 +16,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: SITE_CONFIG.name,
   description: `${SITE_CONFIG.description} Network engineering and system programming projects.`,
-  keywords: ["network engineering", "system programming", "cybersecurity", "cloud architecture", "software development"],
+  keywords: [
+    "network engineering",
+    "system programming",
+    "cybersecurity",
+    "cloud architecture",
+    "software development",
+  ],
   authors: [{ name: SITE_CONFIG.name }],
   creator: SITE_CONFIG.name,
   publisher: SITE_CONFIG.name,
@@ -32,9 +38,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
@@ -57,21 +63,18 @@ export const metadata: Metadata = {
     "script:ld+json": JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": SITE_CONFIG.name,
-      "jobTitle": SITE_CONFIG.jobTitle,
-      "description": SITE_CONFIG.description,
-      "url": SITE_CONFIG.url,
-      "sameAs": [
-        SITE_CONFIG.github,
-        SITE_CONFIG.linkedin
-      ],
-      "knowsAbout": [
+      name: SITE_CONFIG.name,
+      jobTitle: SITE_CONFIG.jobTitle,
+      description: SITE_CONFIG.description,
+      url: SITE_CONFIG.url,
+      sameAs: [SITE_CONFIG.github, SITE_CONFIG.linkedin],
+      knowsAbout: [
         "Network Architecture",
         "Protocol Analysis",
         "System Programming",
         "Cybersecurity",
-        "Cloud Architecture"
-      ]
+        "Cloud Architecture",
+      ],
     }),
   },
 };
@@ -81,9 +84,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-  ],
+  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#fafafa" }],
 };
 
 export default function RootLayout({

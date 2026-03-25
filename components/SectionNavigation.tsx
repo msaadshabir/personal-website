@@ -12,7 +12,9 @@ interface SectionNavigationProps {
   items: readonly SectionItem[];
 }
 
-export default function SectionNavigation({ items }: SectionNavigationProps): React.JSX.Element {
+export default function SectionNavigation({
+  items,
+}: SectionNavigationProps): React.JSX.Element {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const hasActivatedNavRef = useRef(false);
   const isScrollingToRef = useRef(false);
@@ -26,12 +28,14 @@ export default function SectionNavigation({ items }: SectionNavigationProps): Re
 
     const getSectionFromScroll = (): string | null => {
       if (window.scrollY <= 8) {
-        return hasActivatedNavRef.current ? items[0]?.id ?? null : null;
+        return hasActivatedNavRef.current ? (items[0]?.id ?? null) : null;
       }
 
       const anchorLine = window.innerHeight * 0.3;
       const lastSection = sections[sections.length - 1];
-      const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 48;
+      const isNearBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 48;
 
       if (lastSection) {
         const lastRect = lastSection.getBoundingClientRect();

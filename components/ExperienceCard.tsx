@@ -8,7 +8,13 @@ interface ExperienceCardProps {
 
 const cardStyles = "relative w-full rounded-lg p-4";
 
-export default function ExperienceCard({ position, company, dates, description, link }: ExperienceCardProps) {
+export default function ExperienceCard({
+  position,
+  company,
+  dates,
+  description,
+  link,
+}: ExperienceCardProps) {
   const content = (
     <div className="relative flex flex-col gap-2">
       <h3 className="font-bold text-foreground">
@@ -25,7 +31,12 @@ export default function ExperienceCard({ position, company, dates, description, 
 
   if (link && link !== "#") {
     return (
-      <a href={link} className={cardStyles} target="_blank" rel="noopener noreferrer">
+      <a
+        href={link}
+        className={cardStyles}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {content}
       </a>
     );

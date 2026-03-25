@@ -21,7 +21,10 @@ export default function EmailButton(): React.JSX.Element {
       setIsCopied(true);
 
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(() => setIsCopied(false), COPY_RESET_DELAY_MS);
+      timeoutRef.current = setTimeout(
+        () => setIsCopied(false),
+        COPY_RESET_DELAY_MS,
+      );
     } catch {
       // Clipboard API unavailable or permission denied
     }
@@ -35,9 +38,15 @@ export default function EmailButton(): React.JSX.Element {
     >
       <span className={isCopied ? "invisible" : "visible"}>
         Email
-        <span aria-hidden="true" className="text-current ml-0.5">↗</span>
+        <span aria-hidden="true" className="text-current ml-0.5">
+          ↗
+        </span>
       </span>
-      <span className={`absolute left-0 top-0 ${isCopied ? "visible" : "invisible"}`}>Copied</span>
+      <span
+        className={`absolute left-0 top-0 ${isCopied ? "visible" : "invisible"}`}
+      >
+        Copied
+      </span>
     </button>
   );
 }
