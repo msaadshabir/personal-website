@@ -22,14 +22,18 @@ export default function ExperienceCard({
           rel="noopener noreferrer"
           className="group w-fit flex items-center gap-1 font-bold text-foreground hover:text-muted-foreground transition-colors"
         >
-          <h3 className="text-current">{position} @ {company}</h3>
+          <h3 className="text-current">
+            {position} @ {company}
+          </h3>
           <span aria-hidden="true" className="text-current ml-0.5">
             ↗
           </span>
         </a>
       ) : (
         <div className="w-fit flex items-center gap-1 font-bold text-foreground">
-          <h3>{position} @ {company}</h3>
+          <h3>
+            {position} @ {company}
+          </h3>
         </div>
       )}
       <p className="font-medium text-muted-foreground">{dates}</p>

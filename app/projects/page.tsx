@@ -14,7 +14,9 @@ export default function ProjectsPage(): React.JSX.Element {
         </Link>
       </div>
 
-      <h1 className="text-2xl font-bold tracking-[-0.04em] text-foreground mb-2">Projects</h1>
+      <h1 className="text-2xl font-bold tracking-[-0.04em] text-foreground mb-2">
+        Projects
+      </h1>
 
       <div className="flex w-full flex-col gap-6">
         {PROJECTS.map((item) => (
