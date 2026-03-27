@@ -68,25 +68,6 @@ export default function Home(): React.JSX.Element {
       </div>
 
       <div className="flex flex-wrap gap-x-5 gap-y-2">
-        <EmailButton />
-        {socialLinks.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={link.ariaLabel}
-            className="font-medium text-foreground transition-colors hover:text-muted-foreground"
-          >
-            {link.label}
-            <span aria-hidden="true" className="ml-0.5 text-current">
-              ↗
-            </span>
-          </a>
-        ))}
-      </div>
-
-      <div className="flex flex-wrap gap-x-5 gap-y-2">
         <Link
           href="/work"
           className="font-medium text-foreground transition-colors hover:text-muted-foreground"
@@ -105,6 +86,25 @@ export default function Home(): React.JSX.Element {
         >
           Writing
         </Link>
+      </div>
+
+      <div className="flex flex-wrap gap-x-5 gap-y-2">
+        <EmailButton />
+        {socialLinks.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.ariaLabel}
+            className="font-medium text-foreground transition-colors hover:text-muted-foreground"
+          >
+            {link.label}
+            <span aria-hidden="true" className="ml-0.5 text-current">
+              ↗
+            </span>
+          </a>
+        ))}
       </div>
     </section>
   );
