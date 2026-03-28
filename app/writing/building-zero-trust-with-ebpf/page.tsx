@@ -71,7 +71,7 @@ export default function BlogPostPage() {
 
         <p>
           and that's how i stumbled across ebpf. it seemed to be exactly what i was looking 
-          for &ndash; it was fast, extensible, and ran directly inside the linux kernel. 
+          for it was fast, extensible, and ran directly inside the linux kernel. 
           over the months i iterated on my ebpf knowledge, until it became what powers 
           ZTAP today.
         </p>
@@ -108,7 +108,7 @@ export default function BlogPostPage() {
         <h2 className="text-xl font-semibold text-foreground mt-4 mb-2">the epiphany of atomic updates</h2>
 
         <p>
-          what really solidified ebpf for me wasn't just the deployment model&mdash;it was 
+          what really solidified ebpf for me wasn't just the deployment model it was 
           how gracefully it handled state. in ZTAP, network policies dictate exactly what 
           protocols, IP blocks, and ports are allowed to communicate. zero-trust means 
           default deny, always.
