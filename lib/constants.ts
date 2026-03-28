@@ -120,7 +120,15 @@ export const PROJECTS: readonly Project[] = [
   },
 ] as const;
 
-export const WRITING: readonly WritingEntry[] = [];
+export const WRITING: readonly WritingEntry[] = [
+  {
+    id: "001",
+    title: "Building Zero Trust with eBPF",
+    publishedAt: "2026-03-28",
+    description: "My journey moving from iptables to eBPF for dynamic containerized workloads.",
+    url: "/writing/building-zero-trust-with-ebpf", // Fixed path from /blog to /writing matching user's app
+  },
+];
 
 // Experience data
 export const EXPERIENCE: readonly Experience[] = [
