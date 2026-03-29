@@ -28,7 +28,7 @@ export default function BlogPostPage() {
           <h1 className="text-2xl font-bold tracking-[-0.04em] text-foreground mb-1">
             Building Zero Trust with eBPF
           </h1>
-          <time className="text-base text-muted-foreground">2026-03-28</time>
+          <time className="font-medium text-muted-foreground">2026-03-28</time>
         </header>
 
         <div className="flex flex-col gap-6 mt-6">
