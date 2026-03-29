@@ -19,17 +19,17 @@ export default function WritingPage(): React.JSX.Element {
         Writing
       </h1>
 
-      <div className="flex w-full flex-col gap-5">
+      <div className="flex w-full flex-col gap-6">
         {WRITING.length > 0 ? (
           WRITING.map((item) => (
-            <div key={item.id} className="flex flex-col gap-0.5">
+            <div key={item.id} className="relative flex flex-col gap-2 py-4">
               <Link 
                 href={item.url} 
-                className="text-foreground hover:text-muted-foreground transition-colors"
+                className="group w-fit flex items-center gap-1 font-bold text-foreground hover:text-muted-foreground transition-colors"
               >
-                {item.title}
+                <h3 className="text-current">{item.title}</h3>
               </Link>
-              <span className="text-sm text-muted-foreground">{item.publishedAt}</span>
+              <p className="font-medium text-muted-foreground">{item.publishedAt}</p>
             </div>
           ))
         ) : (

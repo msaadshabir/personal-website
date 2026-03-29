@@ -33,7 +33,7 @@ export default function BlogPostPage() {
 
         <div className="flex flex-col gap-6 mt-6">
           <p>
-            i started working with linux firewalls a few years ago. it was a modest server
+            i started working with linux firewalls recently. it was a modest server
           setup for a personal project, and i needed to restrict access between a database 
           and a web application. "it's very easy to use iptables," a tutorial online said, 
           "just follow these steps." and these steps were as follows:
