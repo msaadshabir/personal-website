@@ -32,154 +32,374 @@ export default function BlogPostPage() {
         </header>
 
         <div className="flex flex-col gap-6 mt-6">
+          <h2 className="text-xl font-semibold text-foreground mt-4 mb-2">
+            the iptables honeymoon (and the crash)
+          </h2>
+
           <p>
-            i started working with linux firewalls recently. it was a modest server
-          setup for a personal project, and i needed to restrict access between a database 
-          and a web application. "it's very easy to use iptables," a tutorial online said, 
-          "just follow these steps." and these steps were as follows:
-        </p>
+            i started working with linux firewalls recently. it was a modest server setup
+            for a personal project: a database here, a web app there, and a simple rule
+            in my head—<em>the database should only talk to the web app.</em>
+          </p>
 
-        <ol className="list-decimal pl-6 space-y-2">
-          <li>create a custom chain, then</li>
-          <li>append rules for incoming traffic, and</li>
-          <li>lock down the default policy to drop!</li>
-        </ol>
+          <p>
+            “iptables is easy,” a tutorial said. “just follow these steps:”
+          </p>
 
-        <p>
-          and it worked first try! from that point i was hooked, and i rushed to write 
-          bash scripts that would deploy my iptables configurations across all my servers. 
-          i spent a couple of months managing network policies this way, and it all worked 
-          out great.
-        </p>
+          <ol className="list-decimal pl-6 space-y-2">
+            <li>create a custom chain</li>
+            <li>append rules for incoming traffic</li>
+            <li>lock down the default policy to drop</li>
+          </ol>
 
-        <p>
-          but soon i started to realize the limitations. this came as i began to work with 
-          containerized workloads and dynamic environments, ones that static iptables rules 
-          simply are not meant for. first, there was the sheer volume of rules. managing 
-          thousands of pod IPs meant traversing massive iptables chains linearly, which 
-          killed network performance.
-        </p>
+          <p>and it worked on the first try.</p>
 
-        <p>
-          then there was the ultimate dealbreaker: state inconsistency. i vividly remember 
-          a friday night where an automated policy sync triggered an <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">iptables-restore</code>. 
-          mid-apply, a rogue pod vanished, causing the sync to partially fail. my firewall 
-          was left in a fractured state, and suddenly legitimate database connections were 
-          being dropped. what i needed was a network filter that had both high performance, 
-          but also supported complex, dynamic policies natively and safely.
-        </p>
+          <p>
+            that success was intoxicating. i wrote little bash scripts to ship the same
+            rules to all my boxes. for a while, it felt like i’d finally found the right
+            level of control: explicit rules, a clear deny-by-default posture, and enough
+            flexibility to unblock myself when something broke.
+          </p>
 
-        <p>
-          and that's how i stumbled across ebpf. it seemed to be exactly what i was looking 
-          for it was fast, extensible, and ran directly inside the linux kernel. 
-          over the months i iterated on my ebpf knowledge, until it became what powers 
-          ZTAP today.
-        </p>
+          <p>
+            but as soon as the environment got more dynamic, iptables stopped feeling
+            like a foundation and started feeling like a trap.
+          </p>
 
-        <h2 className="text-xl font-semibold text-foreground mt-4 mb-2">compiling without compilers</h2>
+          <p>
+            first came scale. once you’re dealing with containerized workloads, “a handful
+            of IPs” becomes “a rotating cast of thousands.” the naive version of this story
+            is just performance: huge chains, linear traversal, and every packet paying the
+            price.
+          </p>
 
-        <p>
-          frankly, i was scared of ebpf at first. it seemed like this prehistoric, 
-          highly-complex technology that required compiling c code on every target machine. 
-          the demos i saw online were undeniably impressive, but the thought of installing <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">clang</code>, <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">llvm</code>, 
-          and kernel headers on pristine production nodes just to run a firewall was a 
-          non-starter. zero-trust architectures demand minimal attack surfaces, not bloated 
-          compiler toolchains.
-        </p>
+          <p>the real problem, though, was correctness under change.</p>
 
-        <p>
-          but then i found out about <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">bpf2go</code>. it completely changed my approach. the 
-          realization was that we could compile the ebpf c code into bytecode at build-time, 
-          and embed it directly into the go binary.
-        </p>
+          <p>
+            i still remember a friday night where an automated policy sync triggered an{" "}
+            <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">
+              iptables-restore
+            </code>
+            . mid-apply, a pod vanished. the restore failed partway through. nothing was{" "}
+            <em>totally</em> down—just down enough to be confusing: legitimate database
+            connections started dropping, and the firewall was left in a fractured state.
+          </p>
 
-        <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
-          <code>
-//go:generate go run github.com/cilium/ebpf/cmd/bpf2go -no-strip -target bpfel,bpfeb -cc clang bpf ../../bpf/filter.c -- -I../../bpf
-          </code>
-        </pre>
+          <p>that night crystallized what i actually wanted:</p>
 
-        <p>
-          with just that one magic comment, the entire compiler toolchain requirement 
-          vanished from runtime. ZTAP could be deployed as a single, static binary. if 
-          you were running kernel 5.7+ with cgroup v2, it just worked.
-        </p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>
+              <strong>high performance</strong> under lots of rules
+            </li>
+            <li>
+              <strong>safe updates</strong> that don’t leave the node half-configured
+            </li>
+            <li>
+              <strong>a policy model that matches dynamic systems</strong> instead of
+              fighting them
+            </li>
+          </ul>
 
-        <h2 className="text-xl font-semibold text-foreground mt-4 mb-2">the epiphany of atomic updates</h2>
+          <p>that’s when i started taking eBPF seriously.</p>
 
-        <p>
-          what really solidified ebpf for me wasn't just the deployment model it was 
-          how gracefully it handled state. in ZTAP, network policies dictate exactly what 
-          protocols, IP blocks, and ports are allowed to communicate. zero-trust means 
-          default deny, always.
-        </p>
+          <h2 className="text-xl font-semibold text-foreground mt-4 mb-2">
+            compiling without compilers
+          </h2>
 
-        <p>
-          with iptables, changing a policy meant tearing down rules and rebuilding them. 
-          but with ebpf, we can utilize <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">bpf_link</code> to perform atomic updates without 
-          dropping a single packet.
-        </p>
+          <p>i was honestly scared of eBPF at first.</p>
 
-        <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
-          <code>
-{`// gracefully replacing the ebpf program on the fly
-func (e *EBPFEnforcer) updatePolicyAtomic(old *EBPFEnforcer) error {
-    // 1. load the new program into e.objs
-    // 2. atomically update the cgroup attachment point
-    err := old.egressLink.Update(e.objs.FilterEgress)
-    if err != nil {
-        return fmt.Errorf("failed atomic update: %w", err)
+          <p>
+            not because the idea was hard to love—running a programmable filter inside the
+            kernel is obviously powerful—but because the operational story seemed awful.
+            the demos i saw online were impressive, but they usually implied: compile C on
+            the target machine, ship toolchains around, install kernel headers, and hope
+            nothing subtly mismatches.
+          </p>
+
+          <p>
+            i didn’t want to install{" "}
+            <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">
+              clang
+            </code>
+            ,{" "}
+            <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">
+              llvm
+            </code>
+            , and kernel headers on pristine production nodes just to run a firewall.
+          </p>
+
+          <p>
+            zero trust isn’t only about default deny; it’s also about minimizing what you{" "}
+            <em>have to trust</em> on the box. “a compiler toolchain on every node” is a
+            bigger surface area than i was willing to accept.
+          </p>
+
+          <p>
+            then i found{" "}
+            <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">
+              bpf2go
+            </code>
+            {" "}(from{" "}
+            <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">
+              github.com/cilium/ebpf
+            </code>
+            ), and the whole thing clicked.
+          </p>
+
+          <p>
+            instead of compiling at runtime, you compile at <strong>build time</strong>,
+            embed the resulting eBPF object into the Go binary, and ship a single artifact.
+          </p>
+
+          <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
+            <code>
+              {
+                "//go:generate go run github.com/cilium/ebpf/cmd/bpf2go -no-strip -target bpfel,bpfeb -cc clang bpf ../../bpf/filter.c -- -I../../bpf"
+              }
+            </code>
+          </pre>
+
+          <p>that one line isn’t just convenience—it’s a deployment model.</p>
+
+          <p>
+            in ZTAP, it means the “compiler problem” disappears from runtime. if the host
+            meets the kernel requirements (notably: a modern enough kernel and cgroup v2),
+            ZTAP can load the embedded program and enforce policies without dragging a build
+            toolchain onto the node.
+          </p>
+
+          <h2 className="text-xl font-semibold text-foreground mt-4 mb-2">
+            the epiphany of atomic updates
+          </h2>
+
+          <p>what really sold me on eBPF wasn’t just the packaging.</p>
+
+          <p>
+            it was the fact that eBPF lets you treat kernel enforcement like a real system
+            with a real state transition, instead of a pile of text rules that you repeatedly
+            tear down and rebuild.
+          </p>
+
+          <p>
+            ZTAP’s policy model is intentionally strict: <em>default deny.</em> policies
+            describe exactly what is allowed—protocols, ports, and destinations/sources
+            (usually expressed as IP blocks once targets are resolved).
+          </p>
+
+          <p>the key difference is how updates work.</p>
+
+          <p>
+            with iptables, “apply a new policy” often becomes “rewrite the world,” and if
+            anything fails mid-flight you can end up in an in-between state. it’s not that
+            iptables is bad; it’s that its common update mechanisms don’t give you a clean
+            transactional boundary.
+          </p>
+
+          <p>
+            with eBPF, ZTAP can do something much closer to a transactional rollout:
+          </p>
+
+          <ol className="list-decimal pl-6 space-y-2">
+            <li>load a <strong>new</strong> eBPF program and its maps</li>
+            <li>populate the policy maps with the <strong>next</strong> policy state</li>
+            <li>atomically swap the cgroup attachment to point at the new program</li>
+          </ol>
+
+          <p>
+            in the ZTAP codebase, that atomic swap is handled via a{" "}
+            <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">
+              bpf_link
+            </code>
+            {" "}update (through{" "}
+            <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">
+              github.com/cilium/ebpf/link
+            </code>
+            ). the implementation updates both egress and ingress hooks:
+          </p>
+
+          <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
+            <code>
+              {`// simplified from ZTAP's reload path
+func (e *eBPFEnforcer) UpdateFrom(old *eBPFEnforcer) error {
+    if old.egressLink != nil {
+        if err := old.egressLink.Update(e.objs.FilterEgress); err != nil {
+            return err
+        }
+        e.egressLink = old.egressLink
+        old.egressLink = nil
     }
 
-    // steal ownership so the old enforcer doesn't close it
-    e.egressLink = old.egressLink
-    old.egressLink = nil`}
-          </code>
-        </pre>
+    if old.ingressLink != nil {
+        if err := old.ingressLink.Update(e.objs.FilterIngress); err != nil {
+            return err
+        }
+        e.ingressLink = old.ingressLink
+        old.ingressLink = nil
+    }
 
-        <p>
-          the concept is beautiful. instead of text-parsing iptables chains, we define 
-          strict data structures in c.
-        </p>
+    return nil
+}`}
+            </code>
+          </pre>
 
-        <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
-          <code>
-{`struct policy_key {
-    __u64 cgroup_id;  // source cgroup id
-    __u32 ip;         // target IP
-    __u16 port;
-    __u8  protocol;   // TCP/UDP/ICMP
-    __u8  direction;  // 0=egress, 1=ingress
-};`}
-          </code>
-        </pre>
+          <p>
+            the important part isn’t the exact method name—it’s the shape of the idea:
+          </p>
 
-        <p>
-          this structure sits in an ebpf map. when an update comes from the policy engine, 
-          ZTAP just updates the map values or atomically swaps the program attachment 
-          point. the networking stack never skips a beat. no dropped packets. no fractured state.
-        </p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>the old program keeps enforcing while the next one is prepared</li>
+            <li>the swap is a single, explicit step</li>
+            <li>
+              if the swap fails, you can fall back to a full re-attach instead of running
+              in a half-updated state
+            </li>
+          </ul>
 
-        <h2 className="text-xl font-semibold text-foreground mt-4 mb-2">making it work everywhere</h2>
+          <p>
+            and because ZTAP uses typed data structures in the kernel, policy enforcement
+            becomes a map lookup instead of rule traversal.
+          </p>
 
-        <p>
-          of course, not every environment is a pristine 5.7+ linux kernel. i wanted ZTAP 
-          to be a tool i could use on my local machine just as easily as in production.
-        </p>
+          <p>
+            in the current ZTAP implementation, the kernel-side key is designed for fast
+            lookups and supports CIDR matching via LPM tries. conceptually, the match space
+            looks like:
+          </p>
 
-        <p>
-          so while ebpf is the crowning jewel of the linux enforcer (<code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">ebpf_linux.go</code>), i 
-          still keep traditional fallbacks. if ZTAP detects an older kernel, it falls 
-          back to a custom <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">ZTAP-EGRESS</code> iptables chain. if i build for macOS, it hooks 
-          into <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">pf</code>. but the core principle remains the same.
-        </p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>direction: egress vs ingress</li>
+            <li>protocol: tcp/udp/icmp</li>
+            <li>port: l4 port (or 0 for icmp)</li>
+            <li>ip prefix: ipv4/ipv6 destination (egress) or source (ingress)</li>
+            <li>cgroup id: which workload the packet belongs to (with a “global” fallback)</li>
+          </ul>
 
-        <p>
-          ebpf didn't just solve my performance issues; it completely changed how i think 
-          about kernel-space programming. maybe one day i'll explore writing an entire 
-          network stack in ebpf. but for now, it sets a nice foundation for true zero-trust 
-          microsegmentation.
-        </p>
+          <p>
+            that last detail—cgroup identity—ends up being the bridge between “a network
+            policy” and “the exact workload that policy applies to.”
+          </p>
+
+          <h3 className="text-lg font-semibold text-foreground mt-4 mb-2">
+            default deny, and the subtlety of ‘selected only’
+          </h3>
+
+          <p>
+            one subtle thing i didn’t appreciate early on: <em>default deny</em> is simple
+            in a static world, but in orchestrated environments you also need to decide{" "}
+            <strong>who the policy even applies to</strong>.
+          </p>
+
+          <p>
+            ZTAP’s eBPF program supports a “selected only” mode: if enabled, only traffic
+            from cgroups explicitly selected by policies is evaluated for default-deny
+            behavior; everything else is allowed.
+          </p>
+
+          <p>that sounds like a footnote, but it’s the difference between:</p>
+
+          <ul className="list-disc pl-6 space-y-2">
+            <li>“this node is now a default-deny firewall for every process”</li>
+            <li>“this policy applies to the workloads i selected, and nothing else”</li>
+          </ul>
+
+          <p>
+            that distinction matters when you’re trying to make enforcement safe to roll
+            out.
+          </p>
+
+          <h3 className="text-lg font-semibold text-foreground mt-4 mb-2">
+            flows as a first-class output
+          </h3>
+
+          <p>
+            another thing i love about this design is that enforcement can emit structured
+            flow events.
+          </p>
+
+          <p>
+            the eBPF program writes{" "}
+            <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">
+              flow_event
+            </code>
+            {" "}records into a ring buffer map, and ZTAP can pin that map in bpffs (by
+            default at{" "}
+            <code className="font-mono text-[0.85em] bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.12] px-[0.3rem] py-[0.1rem] rounded-md text-foreground">
+              /sys/fs/bpf/ztap/flow_events
+            </code>
+            ) so user-space tools can stream what’s happening.
+          </p>
+
+          <p>
+            you don’t have to guess whether something was allowed or blocked—you can observe
+            it.
+          </p>
+
+          <h2 className="text-xl font-semibold text-foreground mt-4 mb-2">
+            making it work everywhere
+          </h2>
+
+          <p>of course, not every environment is a pristine modern linux kernel.</p>
+
+          <p>
+            i wanted ZTAP to be a tool i could use locally just as easily as in production,
+            and i didn’t want “no eBPF” to mean “no story.”
+          </p>
+
+          <p>so the design is intentionally layered:</p>
+
+          <ul className="list-disc pl-6 space-y-2">
+            <li>the <strong>policy model</strong> stays the same</li>
+            <li>
+              a <strong>compiler</strong> stage turns policies into enforceable primitives
+              (often concrete IP blocks)
+            </li>
+            <li>
+              an <strong>enforcer backend</strong> applies those primitives using the best
+              mechanism available
+            </li>
+          </ul>
+
+          <p>on linux, the eBPF enforcer is the crown jewel.</p>
+
+          <p>
+            but when eBPF isn’t available (kernel constraints, missing cgroup v2, or
+            insufficient privileges), ZTAP keeps traditional fallbacks around. on linux
+            that can mean an iptables-based path; on macOS, a pf-based path.
+          </p>
+
+          <p>
+            these fallbacks aren’t as elegant as “maps + atomic program swap,” but they
+            keep the policy model portable and make it possible to iterate without requiring
+            perfect conditions everywhere.
+          </p>
+
+          <h2 className="text-xl font-semibold text-foreground mt-4 mb-2">
+            closing thoughts
+          </h2>
+
+          <p>
+            eBPF didn’t just solve my performance issues; it changed how i think about{" "}
+            <em>updates</em>.
+          </p>
+
+          <p>
+            the real win wasn’t “kernel code is fast.” it was “the enforcement state has a
+            clean transition,” and the system has fewer ways to land in a weird half-applied
+            middle.
+          </p>
+
+          <p>
+            if you’re building something in the zero-trust / microsegmentation space, that’s
+            the bar i’d aim for:
+          </p>
+
+          <ul className="list-disc pl-6 space-y-2">
+            <li>make policy changes safe</li>
+            <li>make enforcement observable</li>
+            <li>make the runtime surface area boring</li>
+          </ul>
+
+          <p>and then, once it’s boring, you can make it fast.</p>
         </div>
       </article>
     </section>
