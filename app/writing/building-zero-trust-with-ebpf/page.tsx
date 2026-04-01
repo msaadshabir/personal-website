@@ -39,7 +39,7 @@ export default function BlogPostPage() {
           <p>
             i started working with linux firewalls recently. it was a modest server setup
             for a personal project: a database here, a web app there, and a simple rule
-            in my head—<em>the database should only talk to the web app.</em>
+            in my head: <em>the database should only talk to the web app.</em>
           </p>
 
           <p>
@@ -81,7 +81,7 @@ export default function BlogPostPage() {
               iptables-restore
             </code>
             . mid-apply, a pod vanished. the restore failed partway through. nothing was{" "}
-            <em>totally</em> down—just down enough to be confusing: legitimate database
+            <em>totally</em> down; it was just down enough to be confusing: legitimate database
             connections started dropping, and the firewall was left in a fractured state.
           </p>
 
@@ -109,8 +109,8 @@ export default function BlogPostPage() {
           <p>i was honestly scared of eBPF at first.</p>
 
           <p>
-            not because the idea was hard to love—running a programmable filter inside the
-            kernel is obviously powerful—but because the operational story seemed awful.
+            not because the idea was hard to love (running a programmable filter inside the
+            kernel is obviously powerful), but because the operational story seemed awful.
             the demos i saw online were impressive, but they usually implied: compile C on
             the target machine, ship toolchains around, install kernel headers, and hope
             nothing subtly mismatches.
@@ -159,7 +159,7 @@ export default function BlogPostPage() {
             </code>
           </pre>
 
-          <p>that one line isn’t just convenience—it’s a deployment model.</p>
+          <p>that one line isn’t just convenience; it’s a deployment model.</p>
 
           <p>at runtime, the node does something like this:</p>
 
@@ -215,7 +215,7 @@ defer ingressLink.Close()`}
 
           <p>
             ZTAP’s policy model is intentionally strict: <em>default deny.</em> policies
-            describe exactly what is allowed—protocols, ports, and destinations/sources
+            describe exactly what is allowed: protocols, ports, and destinations/sources
             (usually expressed as IP blocks once targets are resolved).
           </p>
 
@@ -276,7 +276,7 @@ func (e *eBPFEnforcer) UpdateFrom(old *eBPFEnforcer) error {
           </pre>
 
           <p>
-            the important part isn’t the exact method name—it’s the shape of the idea:
+            the important part isn’t the exact method name; it’s the shape of the idea:
           </p>
 
           <ul className="list-disc pl-6 space-y-2">
@@ -359,7 +359,7 @@ int filter_egress(struct __sk_buff *skb)
           </pre>
 
           <p>
-            that last detail—cgroup identity—ends up being the bridge between “a network
+            that last detail (cgroup identity) ends up being the bridge between “a network
             policy” and “the exact workload that policy applies to.”
           </p>
 
@@ -508,7 +508,7 @@ for {
           </pre>
 
           <p>
-            you don’t have to guess whether something was allowed or blocked—you can observe
+            you don’t have to guess whether something was allowed or blocked; you can observe
             it.
           </p>
 
