@@ -161,6 +161,39 @@ export default function BlogPostPage() {
 
           <p>that one line isn’t just convenience—it’s a deployment model.</p>
 
+          <p>at runtime, the node does something like this:</p>
+
+          <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
+            <code>
+              {`// userspace (simplified): load embedded programs + attach to cgroup
+var objs bpfObjects
+if err := loadBpfObjects(&objs, nil); err != nil {
+    return fmt.Errorf("load bpf objects: %w", err)
+}
+defer objs.Close()
+
+egressLink, err := link.AttachCgroup(link.CgroupOptions{
+    Path:    "/sys/fs/cgroup/my-workload",
+    Attach:  ebpf.AttachCGroupInetEgress,
+    Program: objs.FilterEgress,
+})
+if err != nil {
+    return fmt.Errorf("attach egress: %w", err)
+}
+defer egressLink.Close()
+
+ingressLink, err := link.AttachCgroup(link.CgroupOptions{
+    Path:    "/sys/fs/cgroup/my-workload",
+    Attach:  ebpf.AttachCGroupInetIngress,
+    Program: objs.FilterIngress,
+})
+if err != nil {
+    return fmt.Errorf("attach ingress: %w", err)
+}
+defer ingressLink.Close()`}
+            </code>
+          </pre>
+
           <p>
             in ZTAP, it means the “compiler problem” disappears from runtime. if the host
             meets the kernel requirements (notably: a modern enough kernel and cgroup v2),
@@ -274,6 +307,57 @@ func (e *eBPFEnforcer) UpdateFrom(old *eBPFEnforcer) error {
             <li>cgroup id: which workload the packet belongs to (with a “global” fallback)</li>
           </ul>
 
+          <p>here’s a simplified version of that “map lookup” idea (LPM trie + a global fallback):</p>
+
+          <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
+            <code>
+              {`/* kernel-side (simplified): LPM trie allowlist */
+struct lpm_key_v4 {
+    __u32 prefixlen;   // bits in the key to match (selectors + CIDR bits)
+    __u64 cgroup_id;   // 0 = global fallback
+    __u8  proto;       // IPPROTO_TCP / IPPROTO_UDP / IPPROTO_ICMP
+    __u8  direction;   // 0=ingress 1=egress
+    __u16 dport;       // numeric port (host order)
+    __u32 ip4;         // numeric IPv4 (host order)
+};
+
+struct {
+    __uint(type, BPF_MAP_TYPE_LPM_TRIE);
+    __uint(max_entries, 65536);
+    __type(key, struct lpm_key_v4);
+    __type(value, __u8); // 1 = allow
+    __uint(map_flags, BPF_F_NO_PREALLOC);
+} allow_v4 SEC(".maps");
+
+static __always_inline int allowed_v4(struct lpm_key_v4 *k)
+{
+    __u8 *ok = bpf_map_lookup_elem(&allow_v4, k);
+    if (ok) return 1;
+
+    k->cgroup_id = 0; // global fallback
+    ok = bpf_map_lookup_elem(&allow_v4, k);
+    return ok ? 1 : 0;
+}
+
+SEC("cgroup_skb/egress")
+int filter_egress(struct __sk_buff *skb)
+{
+    __u64 cg = bpf_get_current_cgroup_id();
+
+    struct lpm_key_v4 k = {
+        // NOTE: prefixlen is computed per-policy based on selectors + CIDR bits
+        .cgroup_id = cg,
+        .direction = 1,
+    };
+
+    // parse skb into: k.proto, k.dport, k.ip4, k.prefixlen
+    // (omitted here for clarity)
+
+    return allowed_v4(&k) ? 1 : 0; // 1=allow, 0=drop
+}`}
+            </code>
+          </pre>
+
           <p>
             that last detail—cgroup identity—ends up being the bridge between “a network
             policy” and “the exact workload that policy applies to.”
@@ -294,6 +378,30 @@ func (e *eBPFEnforcer) UpdateFrom(old *eBPFEnforcer) error {
             from cgroups explicitly selected by policies is evaluated for default-deny
             behavior; everything else is allowed.
           </p>
+
+          <p>in code, it’s basically:</p>
+
+          <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
+            <code>
+              {`const volatile __u8 selected_only = 1;
+
+struct {
+    __uint(type, BPF_MAP_TYPE_HASH);
+    __uint(max_entries, 8192);
+    __type(key, __u64);   // cgroup_id
+    __type(value, __u8);  // 1 = selected
+} selected_cgroups SEC(".maps");
+
+__u64 cg = bpf_get_current_cgroup_id();
+
+if (selected_only) {
+    __u8 *sel = bpf_map_lookup_elem(&selected_cgroups, &cg);
+    if (!sel) return 1; // not selected => allow
+}
+
+// ... otherwise, enforce allowlist + default deny`}
+            </code>
+          </pre>
 
           <p>that sounds like a footnote, but it’s the difference between:</p>
 
@@ -328,6 +436,76 @@ func (e *eBPFEnforcer) UpdateFrom(old *eBPFEnforcer) error {
             </code>
             ) so user-space tools can stream what’s happening.
           </p>
+
+          <p>kernel-side, emitting an event looks like:</p>
+
+          <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
+            <code>
+              {`struct flow_event {
+    __u64 ts_ns;
+    __u64 cgroup_id;
+    __u32 src_ip4;   // host order (after bpf_ntohl)
+    __u32 dst_ip4;   // host order (after bpf_ntohl)
+    __u16 src_port;  // host order (after bpf_ntohs)
+    __u16 dst_port;  // host order (after bpf_ntohs)
+    __u8  proto;
+    __u8  direction;
+    __u8  verdict;   // 0=deny 1=allow
+    __u8  _pad;
+};
+
+struct {
+    __uint(type, BPF_MAP_TYPE_RINGBUF);
+    __uint(max_entries, 1 << 24); // 16 MiB
+} flow_events SEC(".maps");
+
+static __always_inline void emit_flow(struct flow_event *e)
+{
+    struct flow_event *dst = bpf_ringbuf_reserve(&flow_events, sizeof(*dst), 0);
+    if (!dst) return;
+
+    *dst = *e;
+    bpf_ringbuf_submit(dst, 0);
+}`}
+            </code>
+          </pre>
+
+          <p>and user-space can tail the ring buffer with:</p>
+
+          <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
+            <code>
+              {`// read from the pinned map path mentioned above
+m, err := ebpf.LoadPinnedMap("/sys/fs/bpf/ztap/flow_events", nil)
+if err != nil {
+    return fmt.Errorf("load pinned flow_events: %w", err)
+}
+defer m.Close()
+
+rd, err := ringbuf.NewReader(m)
+if err != nil {
+    return fmt.Errorf("ringbuf reader: %w", err)
+}
+defer rd.Close()
+
+for {
+    record, err := rd.Read()
+    if err != nil {
+        if errors.Is(err, ringbuf.ErrClosed) {
+            break
+        }
+        continue
+    }
+
+    var e FlowEvent
+    if err := binary.Read(bytes.NewReader(record.RawSample), binary.LittleEndian, &e); err != nil {
+        continue
+    }
+
+    dst := net.IPv4(byte(e.DstIP4), byte(e.DstIP4>>8), byte(e.DstIP4>>16), byte(e.DstIP4>>24))
+    fmt.Printf("cg=%d dst=%s:%d verdict=%d\n", e.CgroupID, dst.String(), e.DstPort, e.Verdict)
+}`}
+            </code>
+          </pre>
 
           <p>
             you don’t have to guess whether something was allowed or blocked—you can observe
