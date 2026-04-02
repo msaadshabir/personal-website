@@ -173,7 +173,7 @@ if err := loadBpfObjects(&objs, nil); err != nil {
 defer objs.Close()
 
 egressLink, err := link.AttachCgroup(link.CgroupOptions{
-    Path:    "/sys/fs/cgroup/my-workload",
+        Path:    "/sys/fs/cgroup",
     Attach:  ebpf.AttachCGroupInetEgress,
     Program: objs.FilterEgress,
 })
@@ -183,7 +183,7 @@ if err != nil {
 defer egressLink.Close()
 
 ingressLink, err := link.AttachCgroup(link.CgroupOptions{
-    Path:    "/sys/fs/cgroup/my-workload",
+        Path:    "/sys/fs/cgroup",
     Attach:  ebpf.AttachCGroupInetIngress,
     Program: objs.FilterIngress,
 })
@@ -196,7 +196,8 @@ defer ingressLink.Close()`}
 
           <p>
             in ZTAP, it means the “compiler problem” disappears from runtime. if the host
-            meets the kernel requirements (notably: a modern enough kernel and cgroup v2),
+            meets the kernel requirements (linux kernel 5.7+ with cgroup v2 mounted at
+            /sys/fs/cgroup),
             ZTAP can load the embedded program and enforce policies without dragging a build
             toolchain onto the node.
           </p>
@@ -304,57 +305,53 @@ func (e *eBPFEnforcer) UpdateFrom(old *eBPFEnforcer) error {
             <li>protocol: tcp/udp/icmp</li>
             <li>port: l4 port (or 0 for icmp)</li>
             <li>ip prefix: ipv4/ipv6 destination (egress) or source (ingress)</li>
-            <li>cgroup id: which workload the packet belongs to (with a “global” fallback)</li>
+            <li>cgroup id: which cgroup the packet belongs to (and in global mode, a “cgroup_id=0” fallback)</li>
           </ul>
 
-          <p>here’s a simplified version of that “map lookup” idea (LPM trie + a global fallback):</p>
+          <p>here’s a simplified version of ZTAP’s LPM-trie key and lookup shape:</p>
 
           <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
             <code>
-              {`/* kernel-side (simplified): LPM trie allowlist */
-struct lpm_key_v4 {
-    __u32 prefixlen;   // bits in the key to match (selectors + CIDR bits)
-    __u64 cgroup_id;   // 0 = global fallback
-    __u8  proto;       // IPPROTO_TCP / IPPROTO_UDP / IPPROTO_ICMP
-    __u8  direction;   // 0=ingress 1=egress
-    __u16 dport;       // numeric port (host order)
-    __u32 ip4;         // numeric IPv4 (host order)
+              {`/* kernel-side (simplified): policy_map lookup key (IPv4) */
+#define DIRECTION_EGRESS 0
+#define DIRECTION_INGRESS 1
+
+// fixed selector bits: meta(32) + cgroup_id(64)
+#define LPM_FIXED_BITS 96
+#define LPM_LOOKUP_PREFIXLEN_V4 (LPM_FIXED_BITS + 32)
+
+// meta packs: (direction << 24) | (protocol << 16) | port
+#define PACK_META(direction, protocol, port) (((__u32)(direction) << 24) | ((__u32)(protocol) << 16) | (__u32)(port))
+
+struct policy_key {
+    __u32 prefixlen;
+    __u32 meta;
+    __u64 cgroup_id; // current cgroup (or 0 for global fallback)
+    __u8  ip[4];     // host-order bytes; LPM trie does CIDR matching here
+    __u8  _pad[4];
 };
 
-struct {
-    __uint(type, BPF_MAP_TYPE_LPM_TRIE);
-    __uint(max_entries, 65536);
-    __type(key, struct lpm_key_v4);
-    __type(value, __u8); // 1 = allow
-    __uint(map_flags, BPF_F_NO_PREALLOC);
-} allow_v4 SEC(".maps");
+struct policy_value { __u8 action; __u8 _pad[3]; }; // 0=block, 1=allow
+// policy_map is an LPM trie map: policy_key -> policy_value
 
-static __always_inline int allowed_v4(struct lpm_key_v4 *k)
-{
-    __u8 *ok = bpf_map_lookup_elem(&allow_v4, k);
-    if (ok) return 1;
+// after parsing a packet, ZTAP builds this key and does a lookup:
+// - egress uses destination ip/port
+// - ingress uses source ip + destination port
+__u8  proto = /* parsed protocol */;
+__u16 port  = /* parsed port (0 for ICMP) */;
+__u32 ip_be = /* parsed IPv4 (network byte order) */;
 
-    k->cgroup_id = 0; // global fallback
-    ok = bpf_map_lookup_elem(&allow_v4, k);
-    return ok ? 1 : 0;
-}
+struct policy_key k = {
+    .prefixlen = LPM_LOOKUP_PREFIXLEN_V4,
+    .meta      = PACK_META(DIRECTION_EGRESS, proto, port),
+    .cgroup_id = bpf_get_current_cgroup_id(),
+};
 
-SEC("cgroup_skb/egress")
-int filter_egress(struct __sk_buff *skb)
-{
-    __u64 cg = bpf_get_current_cgroup_id();
+__u32 ip_host = bpf_ntohl(ip_be);
+__builtin_memcpy(k.ip, &ip_host, sizeof(k.ip));
 
-    struct lpm_key_v4 k = {
-        // NOTE: prefixlen is computed per-policy based on selectors + CIDR bits
-        .cgroup_id = cg,
-        .direction = 1,
-    };
-
-    // parse skb into: k.proto, k.dport, k.ip4, k.prefixlen
-    // (omitted here for clarity)
-
-    return allowed_v4(&k) ? 1 : 0; // 1=allow, 0=drop
-}`}
+struct policy_value *v = bpf_map_lookup_elem(&policy_map, &k);
+// in global mode, ZTAP retries with k.cgroup_id = 0 on miss (global fallback)`}
             </code>
           </pre>
 
@@ -383,23 +380,34 @@ int filter_egress(struct __sk_buff *skb)
 
           <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
             <code>
-              {`const volatile __u8 selected_only = 1;
+              {`// selected-only is driven by a small config map + a set of enforced cgroups
+struct enforcement_config { __u8 selected_only; __u8 _pad[3]; };
+
+struct {
+    __uint(type, BPF_MAP_TYPE_ARRAY);
+    __uint(max_entries, 1);
+    __type(key, __u32);
+    __type(value, struct enforcement_config);
+} enforcement_config_map SEC(".maps");
 
 struct {
     __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 8192);
-    __type(key, __u64);   // cgroup_id
-    __type(value, __u8);  // 1 = selected
-} selected_cgroups SEC(".maps");
+    __uint(max_entries, 200000);
+    __type(key, __u64); // cgroup id
+    __type(value, __u8);
+} enforced_cgroups SEC(".maps");
 
-__u64 cg = bpf_get_current_cgroup_id();
+__u32 cfg_k = 0;
+struct enforcement_config *cfg = bpf_map_lookup_elem(&enforcement_config_map, &cfg_k);
+__u8 selected_only = cfg ? cfg->selected_only : 0;
 
+__u64 cgid = bpf_get_current_cgroup_id();
 if (selected_only) {
-    __u8 *sel = bpf_map_lookup_elem(&selected_cgroups, &cg);
-    if (!sel) return 1; // not selected => allow
+    __u8 *present = bpf_map_lookup_elem(&enforced_cgroups, &cgid);
+    if (!present) return 1; // not selected => allow
 }
 
-// ... otherwise, enforce allowlist + default deny`}
+// otherwise: selected => enforce allowlist + default deny on miss`}
             </code>
           </pre>
 
@@ -442,30 +450,30 @@ if (selected_only) {
           <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
             <code>
               {`struct flow_event {
-    __u64 ts_ns;
-    __u64 cgroup_id;
-    __u32 src_ip4;   // host order (after bpf_ntohl)
-    __u32 dst_ip4;   // host order (after bpf_ntohl)
-    __u16 src_port;  // host order (after bpf_ntohs)
-    __u16 dst_port;  // host order (after bpf_ntohs)
-    __u8  proto;
-    __u8  direction;
-    __u8  verdict;   // 0=deny 1=allow
-    __u8  _pad;
+    __u64 timestamp_ns;
+    __u32 src_ip[4];
+    __u32 dest_ip[4];
+    __u16 src_port;
+    __u16 dest_port;
+    __u8  protocol;   // TCP=6, UDP=17, ICMP=1
+    __u8  direction;  // 0=egress, 1=ingress
+    __u8  action;     // 0=blocked, 1=allowed
+    __u8  family;     // 4=IPv4, 6=IPv6
 };
 
 struct {
     __uint(type, BPF_MAP_TYPE_RINGBUF);
-    __uint(max_entries, 1 << 24); // 16 MiB
+    __uint(max_entries, 256 * 1024); // 256KB
 } flow_events SEC(".maps");
 
-static __always_inline void emit_flow(struct flow_event *e)
+static __always_inline void emit_flow_event(/* fields omitted */)
 {
-    struct flow_event *dst = bpf_ringbuf_reserve(&flow_events, sizeof(*dst), 0);
-    if (!dst) return;
+    struct flow_event *e = bpf_ringbuf_reserve(&flow_events, sizeof(*e), 0);
+    if (!e) return;
 
-    *dst = *e;
-    bpf_ringbuf_submit(dst, 0);
+    e->timestamp_ns = bpf_ktime_get_ns();
+    // fill src/dest ip + ports + protocol + direction + action + family
+    bpf_ringbuf_submit(e, 0);
 }`}
             </code>
           </pre>
@@ -474,35 +482,31 @@ static __always_inline void emit_flow(struct flow_event *e)
 
           <pre className="font-mono bg-[#0a0a0a] text-[#ededed] p-5 rounded-xl overflow-x-auto text-[0.85em] leading-relaxed dark:bg-[#111111] border border-transparent dark:border-[#333] shadow-sm tracking-tight">
             <code>
-              {`// read from the pinned map path mentioned above
+              {`// linux: open the pinned ringbuf map and stream events ('ztap flows --follow')
 m, err := ebpf.LoadPinnedMap("/sys/fs/bpf/ztap/flow_events", nil)
 if err != nil {
-    return fmt.Errorf("load pinned flow_events: %w", err)
+    return fmt.Errorf("no pinned map (run 'ztap enforce' first): %w", err)
 }
 defer m.Close()
 
-rd, err := ringbuf.NewReader(m)
+reader, err := flow.CreateFlowReader(m)
 if err != nil {
-    return fmt.Errorf("ringbuf reader: %w", err)
+    return fmt.Errorf("create linux flow reader: %w", err)
 }
-defer rd.Close()
 
-for {
-    record, err := rd.Read()
-    if err != nil {
-        if errors.Is(err, ringbuf.ErrClosed) {
-            break
-        }
-        continue
-    }
+monitor := flow.NewMonitor(reader)
+if err := monitor.Start(ctx); err != nil {
+    return err
+}
+defer func() { _ = monitor.Stop() }()
 
-    var e FlowEvent
-    if err := binary.Read(bytes.NewReader(record.RawSample), binary.LittleEndian, &e); err != nil {
-        continue
-    }
-
-    dst := net.IPv4(byte(e.DstIP4), byte(e.DstIP4>>8), byte(e.DstIP4>>16), byte(e.DstIP4>>24))
-    fmt.Printf("cg=%d dst=%s:%d verdict=%d\n", e.CgroupID, dst.String(), e.DstPort, e.Verdict)
+for event := range monitor.Subscribe(ctx) {
+    fmt.Printf("%s %s %s:%d -> %s:%d (%s)\n",
+        event.Direction, event.Protocol,
+        event.SourceIP, event.SourcePort,
+        event.DestIP, event.DestPort,
+        event.Action,
+    )
 }`}
             </code>
           </pre>
