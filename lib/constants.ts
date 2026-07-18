@@ -131,7 +131,7 @@ export const WRITING: readonly WritingEntry[] = [
   {
     id: "002",
     title: "Using a Computer to Prove a + b = b + a",
-    publishedAt: "2024-07-20",
+    publishedAt: "2026-07-18",
     description: "Proving commutativity of addition over the natural numbers using the Lean 4 proof assistant.",
     url: "/writing/add-commutative",
   },
