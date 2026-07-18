@@ -1,7 +1,7 @@
 import Link from "next/link";
 import EmailButton from "@/components/EmailButton";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, WRITING } from "@/lib/constants";
 
 const socialLinks = [
   {
@@ -106,6 +106,16 @@ export default function Home(): React.JSX.Element {
           </a>
         ))}
       </div>
+
+      <p className="text-xs text-muted-foreground">
+        Latest writing:{" "}
+        <Link
+          href={WRITING[0].url}
+          className="underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-muted-foreground transition-colors"
+        >
+          {WRITING[0].title}
+        </Link>
+      </p>
     </section>
   );
 }
