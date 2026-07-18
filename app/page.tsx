@@ -107,15 +107,24 @@ export default function Home(): React.JSX.Element {
         ))}
       </div>
 
-      <p className="text-sm text-muted-foreground">
-        Latest:{" "}
-        <Link
-          href={WRITING[0].url}
-          className="underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-muted-foreground transition-colors"
-        >
-          {WRITING[0].title}
-        </Link>
-      </p>
+      {(() => {
+        const segments = WRITING[0].url.split("/").filter(Boolean);
+        const dir = segments.slice(0, -1);
+        return (
+          <p className="text-sm text-muted-foreground">
+            Latest:{" "}
+            <span className="text-muted-foreground/50">
+              home{dir.length > 0 && `\\${dir.join("\\")}\\`}
+            </span>
+            <Link
+              href={WRITING[0].url}
+              className="underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-muted-foreground transition-colors"
+            >
+              {WRITING[0].title}
+            </Link>
+          </p>
+        );
+      })()}
     </section>
   );
 }
