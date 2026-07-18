@@ -130,11 +130,11 @@ export default function Home(): React.JSX.Element {
             <span className="text-muted-foreground">\</span>
             <Link
               href={WRITING[0].url}
-              className="underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-muted-foreground transition-colors"
+              className="font-medium text-foreground transition-colors hover:text-muted-foreground"
             >
               {WRITING[0].title}
             </Link>
-            <span className="text-muted-foreground"> — {WRITING[0].publishedAt}</span>
+            <span className="text-muted-foreground"> [{WRITING[0].publishedAt}]</span>
           </p>
         );
       })()}
