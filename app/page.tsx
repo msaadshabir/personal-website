@@ -113,15 +113,28 @@ export default function Home(): React.JSX.Element {
         return (
           <p className="text-sm text-muted-foreground">
             Latest:{" "}
-            <span className="text-muted-foreground/50">
-              home{dir.length > 0 && `\\${dir.join("\\")}\\`}
-            </span>
+            <Link href="/" className="hover:text-foreground transition-colors">
+              home
+            </Link>
+            {dir.map((s, i) => {
+              const path = "/" + segments.slice(0, i + 1).join("/");
+              return (
+                <span key={path}>
+                  <span className="text-muted-foreground">\</span>
+                  <Link href={path} className="hover:text-foreground transition-colors">
+                    {s}
+                  </Link>
+                </span>
+              );
+            })}
+            <span className="text-muted-foreground">\</span>
             <Link
               href={WRITING[0].url}
               className="underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-muted-foreground transition-colors"
             >
               {WRITING[0].title}
             </Link>
+            <span className="text-muted-foreground"> — {WRITING[0].publishedAt}</span>
           </p>
         );
       })()}
