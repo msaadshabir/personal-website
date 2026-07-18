@@ -107,8 +107,8 @@ export default function Home(): React.JSX.Element {
         ))}
       </div>
 
-      <p className="text-xs text-muted-foreground">
-        Latest writing:{" "}
+      <p className="text-sm text-muted-foreground">
+        Latest:{" "}
         <Link
           href={WRITING[0].url}
           className="underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-muted-foreground transition-colors"
