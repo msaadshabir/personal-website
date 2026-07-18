@@ -126,7 +126,14 @@ export const WRITING: readonly WritingEntry[] = [
     title: "Building Zero Trust with eBPF",
     publishedAt: "2026-03-28",
     description: "My journey moving from iptables to eBPF for dynamic containerized workloads.",
-    url: "/writing/building-zero-trust-with-ebpf", // Fixed path from /blog to /writing matching user's app
+    url: "/writing/building-zero-trust-with-ebpf",
+  },
+  {
+    id: "002",
+    title: "Using a Computer to Prove a + b = b + a",
+    publishedAt: "2024-07-20",
+    description: "Proving commutativity of addition over the natural numbers using the Lean 4 proof assistant.",
+    url: "/writing/add-commutative",
   },
 ];
 
