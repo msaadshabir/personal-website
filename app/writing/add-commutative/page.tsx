@@ -12,7 +12,7 @@ export default function BlogPostPage() {
           >
             Home
           </Link>
-          <span className="text-muted-foreground">/</span>
+          <span className="text-muted-foreground">\</span>
           <Link
             href="/writing"
             className="font-medium text-foreground transition-colors hover:text-muted-foreground"
