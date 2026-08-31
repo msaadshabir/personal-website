@@ -108,34 +108,43 @@ export default function Home(): React.JSX.Element {
       </div>
 
       {(() => {
-        const segments = WRITING[0].url.split("/").filter(Boolean);
+        const latestWriting = WRITING[0];
+        const segments = latestWriting.url.split("/").filter(Boolean);
         const dir = segments.slice(0, -1);
+
         return (
-          <p className="text-sm text-muted-foreground">
-            Latest:{" "}
-            <Link href="/" className="hover:text-foreground transition-colors">
-              home
-            </Link>
-            {dir.map((s, i) => {
-              const path = "/" + segments.slice(0, i + 1).join("/");
-              return (
-                <span key={path}>
-                  <span className="text-muted-foreground">\</span>
-                  <Link href={path} className="hover:text-foreground transition-colors">
-                    {s}
-                  </Link>
-                </span>
-              );
-            })}
-            <span className="text-muted-foreground">\</span>
-            <Link
-              href={WRITING[0].url}
-              className="font-medium text-foreground transition-colors hover:text-muted-foreground"
+          <div className="flex flex-col gap-2 text-sm">
+            <span className="font-medium text-muted-foreground">Latest:</span>
+            <nav
+              aria-label="Latest writing breadcrumb"
+              className="flex flex-wrap items-center gap-x-2 gap-y-1 text-muted-foreground"
             >
-              {WRITING[0].title}
-            </Link>
-            <span className="text-muted-foreground"> [{WRITING[0].publishedAt}]</span>
-          </p>
+              <Link href="/" className="transition-colors hover:text-foreground">
+                home
+              </Link>
+              {dir.map((s, i) => {
+                const path = "/" + segments.slice(0, i + 1).join("/");
+                return (
+                  <span key={path} className="flex items-center gap-2">
+                    <span aria-hidden="true">/</span>
+                    <Link href={path} className="transition-colors hover:text-foreground">
+                      {s}
+                    </Link>
+                  </span>
+                );
+              })}
+              <span className="flex items-center gap-2">
+                <span aria-hidden="true">/</span>
+                <Link
+                  href={latestWriting.url}
+                  className="font-medium text-foreground transition-colors hover:text-muted-foreground"
+                >
+                  {latestWriting.title}
+                </Link>
+              </span>
+              <time dateTime={latestWriting.publishedAt}>[{latestWriting.publishedAt}]</time>
+            </nav>
+          </div>
         );
       })()}
     </section>
